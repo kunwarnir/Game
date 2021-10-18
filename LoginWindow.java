@@ -1,31 +1,49 @@
 import javax.swing.*;
-import java.util.*;
-import java.awt.*;
-import java.util.concurrent.TimeUnit; 
-import java.util.Scanner; 
-import java.text.DecimalFormat;
-class Gui extends JFrame{
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class LoginWindow extends JFrame implements ActionListener{
 
   JButton btn;
-  JFrame frame;
-  JLabel label;
+  JLabel lblUsername;
+  JLabel lblMoney;
+  JPanel panel;
+  JTextField txtUserName;
+  JTextField txtMoney;
 
-  public Gui(){
+  public LoginWindow(){
     
-    super("Casino");
-    label = new JLabel(testtr.message(), SwingConstants.CENTER);
+    super("Login");
 
-    add(label);
-    btn = new JButton();
+    panel = new JPanel();
+    panel.setLayout(null);
+    add(panel);
 
-    btn.setText(testtr.message());
-    btn.setSize(20, 40);
-    btn.setLocation(25, 150);
-    btn.setBackground(Color.GRAY);
-    btn.setActionCommand("UserManual");
- 
+    lblUsername = new JLabel("Enter Your Username");
+    lblUsername.setBounds(10, 20, 150, 25);
+    panel.add(lblUsername);
 
-    add(btn);
+    txtUserName = new JTextField(20);
+    txtUserName.setBounds(10, 50, 165, 25);
+    panel.add(txtUserName);
 
+    lblMoney = new JLabel("Enter How Much Money You Want to Play With");
+    lblMoney.setBounds(10, 75, 3000, 25);
+    panel.add(lblMoney);
+
+    txtMoney = new JTextField(20);
+    txtMoney.setBounds(10, 100, 165, 25);
+    panel.add(txtMoney);
+
+    btn = new JButton("Login");
+    btn.setBounds(10, 200, 80, 25);
+    btn.setActionCommand("Login");
+    btn.addActionListener(this);
+    panel.add(btn);
+
+  }
+
+  @Override
+  public void actionPerformed(ActionEvent e) {
   }
 }

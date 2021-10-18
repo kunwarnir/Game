@@ -13,6 +13,7 @@ public class Player{
     currentValue = money;
     historyValues.add(money);
   }
+  
   public String getUsername(){
     return username;
   }
