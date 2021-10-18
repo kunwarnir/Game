@@ -23,7 +23,7 @@ public class GameWindow extends JFrame implements ActionListener{
     super("Black Jack");
 
     add(initialPanel());
-    add(gamePanel());
+    // add(gamePanel());
   }
 
   public JPanel initialPanel(){
