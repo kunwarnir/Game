@@ -11,6 +11,8 @@ public class LoginWindow extends JFrame implements ActionListener{
   JTextField txtUserName;
   JTextField txtMoney;
 
+  public static Player player;
+
   public LoginWindow(){
     
     super("Login");
@@ -45,5 +47,17 @@ public class LoginWindow extends JFrame implements ActionListener{
 
   @Override
   public void actionPerformed(ActionEvent e) {
+    switch (e.getActionCommand()){
+      case "Login":
+        player = new Player(txtUserName.getText(), Double.parseDouble(txtMoney.getText()));
+
+        GameWindow myFrame = new GameWindow();
+
+        myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        myFrame.setSize(600, 500); // set frame size
+        myFrame.setVisible(true); // display frame
+
+        this.dispose();
+    }
   }
 }

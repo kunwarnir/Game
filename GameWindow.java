@@ -11,6 +11,11 @@ public class GameWindow extends JFrame implements ActionListener{
 
   JButton btnBegin;
   
+  static Player player = LoginWindow.player;
+
+  static String username = player.getUsername();
+
+  
 
   public GameWindow(){
     super("Black Jack");
@@ -23,8 +28,7 @@ public class GameWindow extends JFrame implements ActionListener{
     pnlInitial.setLayout(null);
     add(pnlInitial);
 
-
-    lblWelcome = new JLabel("Welcome to the game [nam] you will be playing black jack, and you have [money] dollars, click 'begin' to start the game");
+    lblWelcome = new JLabel("Welcome to the game " + username + "! You will be playing black jack, and you have" + player.getCurrentValue() + " dollars, click 'begin' to start the game");
     lblWelcome.setBounds(100, 20, 400, 50);
     pnlInitial.add(lblWelcome);
 
