@@ -1,20 +1,16 @@
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
+import javax.swing.*;
+
 
 class Main {
   public static void main(String[] args) {
-    JFrame frame = new JFrame("Hello world");
-    frame.setSize(375, 375);
-    frame.setLocation(100, 100);
-    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    
 
-    JLabel label = new JLabel(test.message(), SwingConstants.CENTER);
-    frame.add(label);
+    Gui myFrame = new Gui(); // create LabelFrame
+    myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    myFrame.setSize(600, 500); // set frame size
+    myFrame.setVisible(true); // display frame
 
-    frame.show();
   }
 }
 
-// https://onlinegdb.com/Fs_S7CaY7I
 
