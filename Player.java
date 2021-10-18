@@ -13,6 +13,19 @@ public class Player{
     currentValue = money;
     historyValues.add(money);
   }
+  public String getUsername(){
+    return username;
+  }
 
+  public double getInitValue(){
+    return initialValue;
+  }
 
+  public double getCurrentValue(){
+    return currentValue;
+  }
+
+  public static ArrayList<Double> getHistoryValues() {
+    return historyValues;
+    }
 }
