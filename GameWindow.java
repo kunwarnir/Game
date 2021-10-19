@@ -1,12 +1,16 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.*;
 import java.util.Random;
 
 public class GameWindow extends JFrame implements ActionListener{
 
   JPanel pnlInitial;
   JPanel pnlGame;
+  Container base;
+  JPanel game;
+  JPanel initial;
 
   JLabel lblWelcome;
   JLabel lblWelcome2;
@@ -24,11 +28,22 @@ public class GameWindow extends JFrame implements ActionListener{
   public static Random randomNumber = new Random();
   public static DeckOfCards deck = new DeckOfCards();
 
+  CardLayout layout = new CardLayout();
+  
+
   public GameWindow(){
     super("Black Jack");
 
-    add(initialPanel());
-    // add(gamePanel());
+    base = getContentPane();
+    base.setLayout(layout);
+
+    initial = initialPanel();
+    game = gamePanel();
+
+    base.add(initial, "initial");
+    base.add(game, "game");
+
+    layout.show(base, "initial");
 
 
   }
@@ -96,7 +111,7 @@ public class GameWindow extends JFrame implements ActionListener{
   public void actionPerformed(ActionEvent e) {
     switch (e.getActionCommand()){
       case "Begin":
-        add(gamePanel());
+        layout.show(base, "game");;
     }
   }
 }
