@@ -111,7 +111,14 @@ public class GameWindow extends JFrame implements ActionListener{
   public void actionPerformed(ActionEvent e) {
     switch (e.getActionCommand()){
       case "Begin":
-        layout.show(base, "game");;
+        layout.show(base, "game");
+        break;
+      case "Hit":
+        break;
+      case "Stand":
+        break;
+      case "Peak":
+        break;
     }
   }
 }
