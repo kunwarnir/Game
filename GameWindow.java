@@ -6,9 +6,10 @@ import java.util.Random;
 
 public class GameWindow extends JFrame implements ActionListener{
 
+  Container base;
+  
   JPanel pnlInitial;
   JPanel pnlGame;
-  Container base;
   JPanel game;
   JPanel initial;
 
@@ -118,6 +119,11 @@ public class GameWindow extends JFrame implements ActionListener{
       case "Stand":
         break;
       case "Peak":
+        PeakWindow myFrame = new PeakWindow();
+
+        myFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        myFrame.setSize(300, 100); // set frame size
+        myFrame.setVisible(true); // display frame
         break;
     }
   }
