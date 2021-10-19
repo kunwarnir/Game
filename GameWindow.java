@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 public class GameWindow extends JFrame implements ActionListener{
 
@@ -8,6 +9,7 @@ public class GameWindow extends JFrame implements ActionListener{
   JPanel pnlGame;
 
   JLabel lblWelcome;
+  JLabel lblWelcome2;
   JLabel lblDealerCards;
   JLabel lblYourCards;
 
@@ -19,11 +21,16 @@ public class GameWindow extends JFrame implements ActionListener{
   static Player player = LoginWindow.player;
   static String username = player.getUsername();
 
+  public static Random randomNumber = new Random();
+  public static DeckOfCards deck = new DeckOfCards();
+
   public GameWindow(){
     super("Black Jack");
 
     add(initialPanel());
     // add(gamePanel());
+
+
   }
 
   public JPanel initialPanel(){
@@ -32,9 +39,13 @@ public class GameWindow extends JFrame implements ActionListener{
     pnlInitial.setLayout(null);
     add(pnlInitial);
 
-    lblWelcome = new JLabel("Welcome to the game " + username + "! You will be playing black jack, and you have " + player.getCurrentValue() + " $, click 'begin' to start the game");
+    lblWelcome = new JLabel("Welcome to the game " + username + "! You will be playing black jack.");
     lblWelcome.setBounds(0, 20, 600, 50);
     pnlInitial.add(lblWelcome);
+
+    lblWelcome2 = new JLabel("You have " + player.getCurrentValue() + " $, click 'begin' to start");
+    lblWelcome2.setBounds(0, 50, 600, 50);
+    pnlInitial.add(lblWelcome2);
 
     btnBegin = new JButton("Begin");
     btnBegin.setBounds(250, 237 , 100, 25);
