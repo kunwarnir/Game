@@ -21,7 +21,7 @@ public class PeakWindow extends JFrame implements ActionListener{
   Random random;
 
   public PeakWindow(){
-    super("Black Jack");
+    super("Peak Window");
 
     random = new Random();
 

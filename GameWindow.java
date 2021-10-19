@@ -23,6 +23,11 @@ public class GameWindow extends JFrame implements ActionListener{
   JButton btnHit;
   JButton btnStand;
 
+  JTextField txtDealerCards;
+  String dealerCards = "";
+  JTextField txtYourCards;
+  String yourCards = "";
+
   static Player player = LoginWindow.player;
   static String username = player.getUsername();
 
@@ -56,11 +61,11 @@ public class GameWindow extends JFrame implements ActionListener{
     add(pnlInitial);
 
     lblWelcome = new JLabel("Welcome to the game " + username + "! You will be playing black jack.");
-    lblWelcome.setBounds(0, 20, 600, 50);
+    lblWelcome.setBounds(100, 20, 600, 50);
     pnlInitial.add(lblWelcome);
 
     lblWelcome2 = new JLabel("You have " + player.getCurrentValue() + " $, click 'begin' to start");
-    lblWelcome2.setBounds(0, 50, 600, 50);
+    lblWelcome2.setBounds(150, 50, 600, 50);
     pnlInitial.add(lblWelcome2);
 
     btnBegin = new JButton("Begin");
@@ -79,27 +84,35 @@ public class GameWindow extends JFrame implements ActionListener{
     add(pnlGame);
 
     lblDealerCards = new JLabel("The dealers cards are: ");
-    lblDealerCards.setBounds(10, 30, 100, 50);
+    lblDealerCards.setBounds(10, 15, 200, 50);
     pnlGame.add(lblDealerCards);
 
+    txtDealerCards = new JTextField(dealerCards);
+    txtDealerCards.setBounds(10, 50, 150, 150);
+    pnlGame.add(txtDealerCards);
+
     lblYourCards = new JLabel("Your cards are: ");
-    lblYourCards.setBounds(300, 30, 100, 50);
+    lblYourCards.setBounds(200, 15, 200, 50);
     pnlGame.add(lblYourCards);
 
+    txtYourCards = new JTextField(yourCards);
+    txtYourCards.setBounds(200, 50, 150, 200);
+    pnlGame.add(txtYourCards);
+
     btnHit = new JButton("Hit");
-    btnHit.setBounds(10, 237 , 100, 25);
+    btnHit.setBounds(450, 125 , 100, 25);
     btnHit.setActionCommand("Hit");
     btnHit.addActionListener(this);
     pnlGame.add(btnHit);
 
     btnStand = new JButton("Stand");
-    btnStand.setBounds(150, 237 , 100, 25);
+    btnStand.setBounds(450, 175 , 100, 25);
     btnStand.setActionCommand("Stand");
     btnStand.addActionListener(this);
     pnlGame.add(btnStand);
 
-    btnPeak = new JButton("Peak");
-    btnPeak.setBounds(400, 237 , 100, 25);
+    btnPeak = new JButton("Peak (50/50)");
+    btnPeak.setBounds(400, 50 , 200, 25);
     btnPeak.setActionCommand("Peak");
     btnPeak.addActionListener(this);
     pnlGame.add(btnPeak);
@@ -115,6 +128,9 @@ public class GameWindow extends JFrame implements ActionListener{
         layout.show(base, "game");
         break;
       case "Hit":
+        Card pulledCard = deck.pullRandom();
+        yourCards += "\n " + pulledCard.toString();
+        txtYourCards.setText(yourCards);
         break;
       case "Stand":
         break;
