@@ -13,6 +13,10 @@ public class Player{
     currentValue = money;
     historyValues.add(money);
   }
+
+  public Player (String username){
+    this.username = username;
+  }
   
   public String getUsername(){
     return username;
@@ -28,5 +32,17 @@ public class Player{
 
   public static ArrayList<Double> getHistoryValues() {
     return historyValues;
+  }
+
+  public void addValue(double bet, boolean won){
+
+    if (won){
+        currentValue += bet;
     }
+    else {
+        currentValue -= bet;
+    }
+
+    historyValues.add(currentValue);
+  }
 }

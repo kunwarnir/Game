@@ -23,9 +23,9 @@ public class GameWindow extends JFrame implements ActionListener{
   JButton btnHit;
   JButton btnStand;
 
-  JTextField txtDealerCards;
+  JTextArea txtDealerCards;
   String dealerCards = "";
-  JTextField txtYourCards;
+  JTextArea txtYourCards;
   String yourCards = "";
 
   static Player player = LoginWindow.player;
@@ -50,8 +50,6 @@ public class GameWindow extends JFrame implements ActionListener{
     base.add(game, "game");
 
     layout.show(base, "initial");
-
-
   }
 
   public JPanel initialPanel(){
@@ -87,7 +85,7 @@ public class GameWindow extends JFrame implements ActionListener{
     lblDealerCards.setBounds(10, 15, 200, 50);
     pnlGame.add(lblDealerCards);
 
-    txtDealerCards = new JTextField(dealerCards);
+    txtDealerCards = new JTextArea(dealerCards);
     txtDealerCards.setBounds(10, 50, 150, 150);
     pnlGame.add(txtDealerCards);
 
@@ -95,7 +93,7 @@ public class GameWindow extends JFrame implements ActionListener{
     lblYourCards.setBounds(200, 15, 200, 50);
     pnlGame.add(lblYourCards);
 
-    txtYourCards = new JTextField(yourCards);
+    txtYourCards = new JTextArea(yourCards);
     txtYourCards.setBounds(200, 50, 150, 200);
     pnlGame.add(txtYourCards);
 
@@ -119,8 +117,7 @@ public class GameWindow extends JFrame implements ActionListener{
 
     return pnlGame;
     }
-
-
+  
   @Override
   public void actionPerformed(ActionEvent e) {
     switch (e.getActionCommand()){
@@ -129,8 +126,8 @@ public class GameWindow extends JFrame implements ActionListener{
         break;
       case "Hit":
         Card pulledCard = deck.pullRandom();
-        yourCards += "\n " + pulledCard.toString();
-        txtYourCards.setText(yourCards);
+        yourCards = " TEXT";
+        this.txtYourCards.setText(yourCards);
         break;
       case "Stand":
         break;
