@@ -34,6 +34,31 @@ public class DeckOfCards {
 
   }
 
+  public DeckOfCards(Card favourite){
+
+    Card newCard;
+
+    this.deck = new ArrayList<>();
+    this.remaining = new ArrayList<>();
+
+    deck.clear();
+    int counter = 0;
+
+    for (Card.Suits suit: Card.Suits.values()){
+      for (Card.Ranks rank: Card.Ranks.values()){
+        // System.out.println(suit + " , " + rank);
+        newCard = new Card(suit, rank);
+        this.deck.add(newCard);
+      }
+    }
+
+    remaining = deck;
+    for (int i = 0; i < deck.size(); i++){
+      System.out.println(deck.get(i));
+    }
+
+  }
+
   public void shuffleDeck(){
     Collections.shuffle(deck);
   }
