@@ -51,6 +51,10 @@ public class LoginWindow extends JFrame implements ActionListener{
       case "Login":
         player = new Player(txtUserName.getText(), Double.parseDouble(txtMoney.getText()));
 
+        DeckOfCards deck = new DeckOfCards();
+
+        System.out.println(deck.pullRandom().toString());
+
         GameWindow myFrame = new GameWindow();
 
         myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

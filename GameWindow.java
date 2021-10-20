@@ -85,7 +85,7 @@ public class GameWindow extends JFrame implements ActionListener{
     lblDealerCards.setBounds(10, 15, 200, 50);
     pnlGame.add(lblDealerCards);
 
-    txtDealerCards = new JTextArea(dealerCards);
+    txtDealerCards = new JTextArea("The Dealers Cards will appear here");
     txtDealerCards.setBounds(10, 50, 150, 150);
     pnlGame.add(txtDealerCards);
 
@@ -93,7 +93,7 @@ public class GameWindow extends JFrame implements ActionListener{
     lblYourCards.setBounds(200, 15, 200, 50);
     pnlGame.add(lblYourCards);
 
-    txtYourCards = new JTextArea(yourCards);
+    txtYourCards = new JTextArea("Your cards will appear here");
     txtYourCards.setBounds(200, 50, 150, 200);
     pnlGame.add(txtYourCards);
 
@@ -125,9 +125,10 @@ public class GameWindow extends JFrame implements ActionListener{
         layout.show(base, "game");
         break;
       case "Hit":
-        Card pulledCard = deck.pullRandom();
-        yourCards = " TEXT";
-        this.txtYourCards.setText(yourCards);
+        Card pulled = deck.pullRandom();
+        String word = pulled.toString();
+        System.out.println("++++++++++++++++++++++++++++++++");
+        txtDealerCards.setText(word);
         break;
       case "Stand":
         break;
