@@ -28,10 +28,15 @@ public class GameWindow extends JFrame implements ActionListener{
   String dealerCards = "";
   JTextArea txtYourCards;
   String yourCards = "";
+  double moneyBet;
+
+  boolean win;
 
   // static Player player = LoginWindow.player;
   static Player player = new Player("Kunwar", 555);
   static String username = player.getUsername();
+
+  static Dealer dealer = new Dealer();
 
   public static Random randomNumber = new Random();
   public DeckOfCards deck = new DeckOfCards();
@@ -66,6 +71,8 @@ public class GameWindow extends JFrame implements ActionListener{
     lblWelcome2 = new JLabel("You have " + player.getCurrentValue() + " $, click 'begin' to start");
     lblWelcome2.setBounds(150, 50, 600, 50);
     pnlInitial.add(lblWelcome2);
+
+    
 
     btnBegin = new JButton("Begin");
     btnBegin.setBounds(250, 237 , 100, 25);
@@ -124,12 +131,19 @@ public class GameWindow extends JFrame implements ActionListener{
     switch (e.getActionCommand()){
       case "Begin":
         layout.show(base, "game");
+        try {
+          TimeUnit.SECONDS.sleep(3);
+        }
+        catch(InterruptedException ex){
+          System.out.println("InterruptedException: " + ex);
+        }
+        beginGame();
         break;
       case "Hit":
-        Card pulled = deck.pullRandom();
-        txtDealerCards.setText(pulled.toString());
+        hit();
         break;
       case "Stand":
+        stand();
         break;
       case "Peak":
         PeakWindow myFrame = new PeakWindow();
@@ -142,11 +156,52 @@ public class GameWindow extends JFrame implements ActionListener{
   }
 
   public boolean isWin(){
-    return true;
+    
+    boolean win = false;
+    
+    if (player.distanceFrom21() < 0 && dealer.distanceFrom21() > 0){
+      win = false;
+    }
+    else if (dealer.distanceFrom21() < 0 && player.distanceFrom21() > 0){
+      win = true;
+    }
+    else if (player.distanceFrom21() < dealer.distanceFrom21()){
+      win = true;
+    }
+    else {
+      win = false;
+    }
+
+    return win;
+    
   }
 
   public void beginGame(){
     
+    deck.shuffleDeck();
+
+    dealer.addCard(deck.pullTop());
+    player.addCard(deck.pullTop());
+    dealer.addCard(deck.pullTop());
+
+    dealerCards = dealer.toString();
+    yourCards = player.toString();
+
+    txtDealerCards.setText(dealerCards);
+    txtYourCards.setText(yourCards);    
+
+  }
+
+  public void hit(){
+    player.addCard(deck.pullTop());
+    yourCards = player.toString();
+    txtYourCards.setText(yourCards);
+  }
+
+  public void stand(){
+    dealer.addCard(deck.pullTop());
+    dealerCards = dealer.toString();
+    txtDealerCards.setText(dealerCards);
   }
 
 }

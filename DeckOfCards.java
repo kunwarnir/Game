@@ -65,20 +65,19 @@ public class DeckOfCards {
     return remaining.size();
   }
 
-  public Card pullRandom(){
+  public Card pullTop(){
 
     randomNumber = new Random();
     pulled = new ArrayList<>();
-    int index = randomNumber.nextInt(remaining.size()-1);
     Card pulledCard;
 
     if (remaining.isEmpty()){
       return null;
     }
     else {
-      pulledCard = remaining.get(index);
+      pulledCard = remaining.get(remaining.size()-1);
       pulled.add(pulledCard);
-      remaining.remove(index);
+      remaining.remove(remaining.size()-1);
 
       return pulledCard;
     }

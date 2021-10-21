@@ -10,6 +10,7 @@ public class Player{
   private double currentValue;
   private static ArrayList<Double> historyValues = new ArrayList<>();
   List<Card> hand;
+  int sum = 0;
 
   public Player(String username, double money){
     this.username = username;
@@ -17,6 +18,7 @@ public class Player{
     currentValue = money;
     historyValues.add(money);
     hand = new ArrayList<Card>();
+    
   }
 
   public Player (String username){
@@ -67,7 +69,7 @@ public class Player{
         value = card.toString();
       }
       else {
-        value += ", " + card.toString();
+        value += "\n" + card.toString();
       }
     }
 
@@ -75,12 +77,15 @@ public class Player{
   }
 
   public int getHandSum(){
-    int sum = 0;
-    
+       
     for (Card card: hand){
       sum += card.getValue();
     }
     
     return sum;
+  }
+
+  public int distanceFrom21(){
+    return 21 - sum;
   }
 }

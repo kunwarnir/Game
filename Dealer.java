@@ -7,6 +7,7 @@ import java.util.Random;
 public class Dealer{
 
   List<Card> hand;
+  int sum = 0;
 
   public Dealer(){
     hand = new ArrayList<Card>();    
@@ -28,7 +29,7 @@ public class Dealer{
         value = card.toString();
       }
       else {
-        value += ", " + card.toString();
+        value += "\n" + card.toString();
       }
     }
 
@@ -36,12 +37,15 @@ public class Dealer{
   }
 
   public int getHandSum(){
-    int sum = 0;
     
     for (Card card: hand){
       sum += card.getValue();
     }
     
     return sum;
+  }
+
+  public int distanceFrom21(){
+    return 21 - sum;
   }
 }
