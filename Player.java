@@ -41,7 +41,7 @@ public class Player{
     return historyValues;
   }
 
-  public void addValue(double bet, boolean won){
+  public void addBet(double bet, boolean won){
 
     if (won){
         currentValue += bet;

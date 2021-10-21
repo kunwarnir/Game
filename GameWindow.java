@@ -18,6 +18,10 @@ public class GameWindow extends JFrame implements ActionListener{
   JLabel lblWelcome2;
   JLabel lblDealerCards;
   JLabel lblYourCards;
+  JLabel lblBet;
+  JLabel lblBetError;
+
+  JTextField txtBet;
 
   JButton btnBegin;
   JButton btnPeak;
@@ -28,6 +32,8 @@ public class GameWindow extends JFrame implements ActionListener{
   String dealerCards = "";
   JTextArea txtYourCards;
   String yourCards = "";
+  String betError = "Please enter a valid number!";
+
   double moneyBet;
 
   boolean win;
@@ -72,7 +78,17 @@ public class GameWindow extends JFrame implements ActionListener{
     lblWelcome2.setBounds(150, 50, 600, 50);
     pnlInitial.add(lblWelcome2);
 
-    
+    lblBet = new JLabel("Enter How Much Money You Want to bet");
+    lblBet.setBounds(120, 115, 3000, 25);
+    pnlInitial.add(lblBet);
+
+    lblBetError = new JLabel("   ");
+    lblBetError.setBounds(120, 175, 3000, 25);
+    pnlInitial.add(lblBetError);
+
+    txtBet = new JTextField(20);
+    txtBet.setBounds(200, 150, 165, 25);
+    pnlInitial.add(txtBet);
 
     btnBegin = new JButton("Begin");
     btnBegin.setBounds(250, 237 , 100, 25);
@@ -130,14 +146,13 @@ public class GameWindow extends JFrame implements ActionListener{
   public void actionPerformed(ActionEvent e) {
     switch (e.getActionCommand()){
       case "Begin":
-        layout.show(base, "game");
         try {
-          TimeUnit.SECONDS.sleep(3);
+          moneyBet = Double.parseDouble(txtBet.getText());
+          layout.show(base, "game");
+          beginGame();
+        }catch (NumberFormatException ex) {
+          lblBetError.setText(betError);
         }
-        catch(InterruptedException ex){
-          System.out.println("InterruptedException: " + ex);
-        }
-        beginGame();
         break;
       case "Hit":
         hit();

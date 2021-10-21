@@ -37,6 +37,8 @@ public class LoginWindow extends JFrame implements ActionListener{
     txtMoney.setBounds(200, 150, 165, 25);
     panel.add(txtMoney);
 
+    
+
     btn = new JButton("Login");
     btn.setBounds(250, 200, 80, 25);
     btn.setActionCommand("Login");
