@@ -152,6 +152,7 @@ public class GameWindow extends JFrame implements ActionListener{
           beginGame();
         }catch (NumberFormatException ex) {
           lblBetError.setText(betError);
+          System.out.println(ex);
         }
         break;
       case "Hit":

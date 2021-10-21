@@ -7,9 +7,12 @@ public class LoginWindow extends JFrame implements ActionListener{
   JButton btn;
   JLabel lblUsername;
   JLabel lblMoney;
+  JLabel lblBetError;
   JPanel panel;
   JTextField txtUserName;
   JTextField txtMoney;
+
+  String betError;
 
   public static Player player;
 
@@ -33,6 +36,10 @@ public class LoginWindow extends JFrame implements ActionListener{
     lblMoney.setBounds(120, 115, 3000, 25);
     panel.add(lblMoney);
 
+    lblBetError = new JLabel("   ");
+    lblBetError.setBounds(120, 175, 3000, 25);
+    panel.add(lblBetError);
+
     txtMoney = new JTextField(20);
     txtMoney.setBounds(200, 150, 165, 25);
     panel.add(txtMoney);
@@ -51,15 +58,23 @@ public class LoginWindow extends JFrame implements ActionListener{
   public void actionPerformed(ActionEvent e) {
     switch (e.getActionCommand()){
       case "Login":
-        player = new Player(txtUserName.getText(), Double.parseDouble(txtMoney.getText()));
 
-        GameWindow myFrame = new GameWindow();
+        try {
+          player = new Player(txtUserName.getText(), Double.parseDouble(txtMoney.getText()));
+          GameWindow myFrame = new GameWindow();
 
-        myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        myFrame.setSize(600, 500); // set frame size
-        myFrame.setVisible(true); // display frame
+          myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+          myFrame.setSize(600, 500); // set frame size
+          myFrame.setVisible(true); // display frame
 
         this.dispose();
+        }catch (NumberFormatException ex) {
+          lblBetError.setText(betError);
+          System.out.println(ex);
+        }
+        
+
+        
     }
   }
 }
