@@ -32,14 +32,13 @@ public class GameWindow extends JFrame implements ActionListener{
   String dealerCards = "";
   JTextArea txtYourCards;
   String yourCards = "";
-  String betError = "Please enter a valid number!";
+  String betError;
 
   double moneyBet;
 
   boolean win;
 
-  // static Player player = LoginWindow.player;
-  static Player player = new Player("Kunwar", 555);
+  static Player player = LoginWindow.player;
   static String username = player.getUsername();
 
   static Dealer dealer = new Dealer();
@@ -148,9 +147,16 @@ public class GameWindow extends JFrame implements ActionListener{
       case "Begin":
         try {
           moneyBet = Double.parseDouble(txtBet.getText());
-          layout.show(base, "game");
-          beginGame();
+          if (moneyBet > player.getCurrentValue()){
+            betError = "You cannot bet more money than you have!";
+            lblBetError.setText(betError);
+          }
+          else {
+            layout.show(base, "game");
+            beginGame();
+          }
         }catch (NumberFormatException ex) {
+          betError = "Please enter a valid number!";
           lblBetError.setText(betError);
           System.out.println(ex);
         }
