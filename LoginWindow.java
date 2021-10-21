@@ -12,7 +12,7 @@ public class LoginWindow extends JFrame implements ActionListener{
   JTextField txtUserName;
   JTextField txtMoney;
 
-  String betError;
+  String betError = "Please enter a valid number for the money bet or leave empty";
 
   public static Player player;
 
@@ -58,23 +58,33 @@ public class LoginWindow extends JFrame implements ActionListener{
   public void actionPerformed(ActionEvent e) {
     switch (e.getActionCommand()){
       case "Login":
-
-        try {
-          player = new Player(txtUserName.getText(), Double.parseDouble(txtMoney.getText()));
+        if (txtMoney.getText().isEmpty()){
+          player = new Player(txtUserName.getText());
           GameWindow myFrame = new GameWindow();
 
           myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
           myFrame.setSize(600, 500); // set frame size
           myFrame.setVisible(true); // display frame
 
-        this.dispose();
+          this.dispose();
+        }
+        else {
+          try {
+          player = new Player(txtUserName.getText(), Double.parseDouble(txtMoney.getText()));
+
+          GameWindow myFrame = new GameWindow();
+
+          myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+          myFrame.setSize(600, 500); // set frame size
+          myFrame.setVisible(true); // display frame
+
+          this.dispose();
+
         }catch (NumberFormatException ex) {
           lblBetError.setText(betError);
           System.out.println(ex);
         }
-        
-
-        
+        }
     }
   }
 }
