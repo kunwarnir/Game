@@ -3,6 +3,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.*;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class GameWindow extends JFrame implements ActionListener{
 
@@ -28,14 +29,14 @@ public class GameWindow extends JFrame implements ActionListener{
   JTextArea txtYourCards;
   String yourCards = "";
 
-  static Player player = LoginWindow.player;
+  // static Player player = LoginWindow.player;
+  static Player player = new Player("Kunwar", 555);
   static String username = player.getUsername();
 
   public static Random randomNumber = new Random();
-  public static DeckOfCards deck = new DeckOfCards();
+  public DeckOfCards deck = new DeckOfCards();
 
   CardLayout layout = new CardLayout();
-  
 
   public GameWindow(){
     super("Black Jack");
@@ -126,9 +127,7 @@ public class GameWindow extends JFrame implements ActionListener{
         break;
       case "Hit":
         Card pulled = deck.pullRandom();
-        String word = pulled.toString();
-        System.out.println("++++++++++++++++++++++++++++++++");
-        txtDealerCards.setText(word);
+        txtDealerCards.setText(pulled.toString());
         break;
       case "Stand":
         break;
@@ -141,4 +140,13 @@ public class GameWindow extends JFrame implements ActionListener{
         break;
     }
   }
+
+  public boolean isWin(){
+    return true;
+  }
+
+  public void beginGame(){
+    
+  }
+
 }

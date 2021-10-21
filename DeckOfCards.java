@@ -9,13 +9,14 @@ public class DeckOfCards {
   private ArrayList<Card> remaining;
   private Random randomNumber;
 
+  
+
   public DeckOfCards(){
 
     this.deck = new ArrayList<>();
     this.remaining = new ArrayList<>();
 
     deck.clear();
-    int counter = 0;
 
     for (Card.Suits suit: Card.Suits.values()){
       for (Card.Ranks rank: Card.Ranks.values()){
@@ -67,6 +68,7 @@ public class DeckOfCards {
   public Card pullRandom(){
 
     randomNumber = new Random();
+    pulled = new ArrayList<>();
     int index = randomNumber.nextInt(remaining.size()-1);
     Card pulledCard;
 
@@ -81,6 +83,10 @@ public class DeckOfCards {
       return pulledCard;
     }
 
+  }
+
+  public ArrayList<Card> getPulled(){
+    return pulled;
   }
 
   public void print(){

@@ -1,4 +1,7 @@
 import java.util.ArrayList;
+import java.util.*;
+import java.util.Collections;
+import java.util.Random;
 
 public class Player{
 
@@ -6,12 +9,14 @@ public class Player{
   private double initialValue;
   private double currentValue;
   private static ArrayList<Double> historyValues = new ArrayList<>();
+  List<Card> hand;
 
   public Player(String username, double money){
     this.username = username;
     initialValue = money;
     currentValue = money;
     historyValues.add(money);
+    hand = new ArrayList<Card>();
   }
 
   public Player (String username){
@@ -44,5 +49,38 @@ public class Player{
     }
 
     historyValues.add(currentValue);
+  }
+
+  public void addCard(Card card){
+    hand.add(card);
+  }
+
+  public List<Card> getHand(){
+    return hand;
+  }
+
+  public String toString(){
+    String value = "";
+    
+    for (Card card: hand){
+      if (value.isEmpty()){
+        value = card.toString();
+      }
+      else {
+        value += ", " + card.toString();
+      }
+    }
+
+    return value;
+  }
+
+  public int getHandSum(){
+    int sum = 0;
+    
+    for (Card card: hand){
+      sum += card.getValue();
+    }
+    
+    return sum;
   }
 }
