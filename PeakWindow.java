@@ -15,6 +15,7 @@ public class PeakWindow extends JFrame implements ActionListener{
   JPanel fail;
 
   JLabel lblSuccess;
+  JLabel lblNextCard;
   JLabel lblFail;
 
   CardLayout layout = new CardLayout();
