@@ -172,14 +172,6 @@ public class GameWindow extends JFrame implements ActionListener{
 
   lblEndInfo = new JLabel();
   lblEndInfo.setBounds(250, 15, 200, 50);
-
-  if (win){
-    lblEndInfo.setText("Great Job! You won the game");
-  }
-  else {
-    lblEndInfo.setText("Better luck next time");
-  }
-
   pnlEnd.add(lblEndInfo);
 
   lblCurrentMoneyInfo = new JLabel("The amount of money you currently have is:");
@@ -194,7 +186,7 @@ public class GameWindow extends JFrame implements ActionListener{
   lblYourHandInfo.setBounds(400, 50, 200, 50);
   pnlEnd.add(lblYourHandInfo);
 
-  txtYourHandValues = new JTextArea(player.toString());
+  txtYourHandValues = new JTextArea(" ");
   txtYourHandValues.setBounds(400, 100, 150, 200);
   pnlEnd.add(txtYourHandValues);
 
@@ -226,6 +218,9 @@ public class GameWindow extends JFrame implements ActionListener{
           else {
             layout.show(base, "game");
             beginGame();
+            if (!keepPlaying()){
+              endGame();
+            }
           }
         }catch (NumberFormatException ex) {
           betError = "Please enter a valid number!";
@@ -235,15 +230,15 @@ public class GameWindow extends JFrame implements ActionListener{
         break;
       case "Hit":
         hit();
-        if (keepPlaying()){
+        if (!keepPlaying()){
           endGame();
         }
+
         break;
       case "Stand":
         stand();
-        if (keepPlaying()){
-          endGame();
-        }
+        endGame();
+
         break;
       case "Peak":
         PeakWindow myFrame = new PeakWindow();
@@ -291,10 +286,10 @@ public class GameWindow extends JFrame implements ActionListener{
 
   public boolean keepPlaying(){
     if (player.getHandSum() >= 21 || dealer.getHandSum() >= 21){
-      return true;
+      return false;
     }
     else {
-      return false;
+      return true;
     }
   }
 
@@ -304,34 +299,54 @@ public class GameWindow extends JFrame implements ActionListener{
 
     dealer.addCard(deck.pullTop());
     player.addCard(deck.pullTop());
-    dealer.addCard(deck.pullTop());
 
     dealerCards = dealer.toString();
     yourCards = player.toString();
 
-    txtDealerCards.setText(dealerCards);
-    txtYourCards.setText(yourCards);    
+    txtDealerCards.setText(dealerCards); 
+    txtYourCards.setText(yourCards);
+
+    lblDealerTotal.setText("The dealers total is: " + dealer.getHandSum());
+    lblYourTotal.setText("Your total is: " + player.getHandSum());  
 
   }
 
   public void endGame(){
+    
+    if (isWin()){
+      lblEndInfo.setText("Great Job! You won the game");
+      lblEnfInfo.setBounds(400, 50, 200, 50)
+    }
+    else {
+      lblEndInfo.setText("Better luck next time");
+    }
+
     layout.show(base, "end");
 
     player.addBet(moneyBet, win);
 
+    lblYourHandInfo.setText("You had a score of: " + player.getHandSum());
+    txtYourHandValues.setText(player.toString());
 
+    player.clearSum();
+    dealer.clearSum();
+
+    player.clearHand();
+    dealer.clearHand();
   }
 
   public void hit(){
     player.addCard(deck.pullTop());
     yourCards = player.toString();
     txtYourCards.setText(yourCards);
+    lblYourTotal.setText("Your total is: " + player.getHandSum()); 
   }
 
   public void stand(){
     dealer.addCard(deck.pullTop());
     dealerCards = dealer.toString();
     txtDealerCards.setText(dealerCards);
+    lblDealerTotal.setText("The dealers total is: " + dealer.getHandSum());
   }
 
 }

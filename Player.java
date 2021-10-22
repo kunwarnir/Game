@@ -77,7 +77,7 @@ public class Player{
   }
 
   public int getHandSum(){
-       
+    sum = 0;
     for (Card card: hand){
       sum += card.getValue();
     }
@@ -85,7 +85,15 @@ public class Player{
     return sum;
   }
 
+  public void clearSum(){
+    sum = 0;
+  }
+
   public int distanceFrom21(){
     return 21 - sum;
+  }
+
+  public void clearHand(){
+    hand.clear();
   }
 }
