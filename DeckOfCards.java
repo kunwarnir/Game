@@ -84,6 +84,20 @@ public class DeckOfCards {
 
   }
 
+  public Card seeTop(){
+    Card top;
+
+    if (remaining.isEmpty()){
+      return null;
+    }
+    else {
+      top = remaining.get(remaining.size()-1);
+
+      return top;
+    }
+
+  }
+
   public ArrayList<Card> getPulled(){
     return pulled;
   }
