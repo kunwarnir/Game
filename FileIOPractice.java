@@ -2,12 +2,14 @@ import java.io.*;
 
 public class FileIOPractice {
 
-  public void practice(){
+  public static void practice(){
     try {
-      BufferedWriter bw = new BufferedWriter(new FileWriter("file.txt"));
 
-      bw.write("This is the new file");
-      bw.close();
+      File file = new File("file.txt");
+      FileWriter fw = new FileWriter(file, true);
+
+      fw.write("wow appended line");
+      fw.close();
     } catch (Exception e){
       System.out.println(e);
     }

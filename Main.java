@@ -10,6 +10,8 @@ class Main {
     myFrame.setSize(600, 500); // set frame size
     myFrame.setVisible(true); // display frame
 
+    FileIOPractice.practice();
+
   }
 }
 
