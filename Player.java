@@ -11,12 +11,14 @@ public class Player{
   private double initialValue;
   private double currentValue;
   private static ArrayList<Double> historyValues = new ArrayList<>();
+  public static ArrayList<Boolean> historyGames = new ArrayList<>();
   List<Card> hand;
   int sum = 0;
+  int lives;
 
   private Player(){
     hand = new ArrayList<Card>();
-    
+    lives = 2;
   }
 
   public void setUsername(String username){
@@ -27,6 +29,7 @@ public class Player{
     initialValue = money;
     currentValue = money;
     historyValues.add(money);
+    historyGames.add(null);
   }
 
   public static Player getInstance(){
@@ -53,7 +56,7 @@ public class Player{
     return historyValues;
   }
 
-  public void addBet(double bet, boolean won){
+  public void addGame(double bet, boolean won){
 
     if (won){
         currentValue += bet;
@@ -63,6 +66,7 @@ public class Player{
     }
 
     historyValues.add(currentValue);
+    historyGames.add(won);
   }
 
   public void addCard(Card card){
@@ -108,4 +112,18 @@ public class Player{
   public void clearHand(){
     hand.clear();
   }
+
+  public void loseLife(){
+    if (lives <= 0){
+      System.out.println("No More lives!!");
+    }
+    else {
+      lives--;
+    }
+  }
+
+  public int getLives(){
+    return lives;
+  }
+  
 }

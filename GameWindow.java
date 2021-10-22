@@ -325,7 +325,7 @@ public class GameWindow extends JFrame implements ActionListener{
     
     layout.show(base, "end");
 
-    player.addBet(moneyBet, win);
+    player.addGame(moneyBet, win);
 
     lblYourHandInfo.setText("You had a score of: " + player.getHandSum());
     txtYourHandValues.setText(player.toString());

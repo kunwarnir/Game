@@ -5,6 +5,8 @@ public class ProgressWindow{
   String fileMessage;
   File file = new File("progress.txt");
 
+  Player player = Player.getInstance();
+
   public ProgressWindow(){
 
   }

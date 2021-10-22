@@ -12,7 +12,7 @@ public class LoginWindow extends JFrame implements ActionListener{
   JTextField txtUserName;
   JTextField txtMoney;
 
-  String betError = "Please enter a valid number for the money bet or leave empty";
+  String betError = "Please enter a valid number for the money bet (cannot leave empty)";
 
   public static Player player = Player.getInstance();
 
@@ -58,9 +58,11 @@ public class LoginWindow extends JFrame implements ActionListener{
   public void actionPerformed(ActionEvent e) {
     switch (e.getActionCommand()){
       case "Login":
-        if (txtMoney.getText().isEmpty()){
-          player.setUsername(txtUserName.getText());;
-          
+               
+        try {
+          player.setUsername(txtUserName.getText());
+          player.setMoney(Double.parseDouble(txtMoney.getText()));
+
           GameWindow myFrame = new GameWindow();
 
           myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -68,25 +70,11 @@ public class LoginWindow extends JFrame implements ActionListener{
           myFrame.setVisible(true); // display frame
 
           this.dispose();
-        }
-        else {
-          try {
-            player.setUsername(txtUserName.getText());
-            player.setMoney(Double.parseDouble(txtMoney.getText()));
 
-            GameWindow myFrame = new GameWindow();
-
-            myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            myFrame.setSize(600, 500); // set frame size
-            myFrame.setVisible(true); // display frame
-
-            this.dispose();
-
-        } catch (NumberFormatException ex) {
-            lblBetError.setText(betError);
-            System.out.println(ex);
-        }
-        }
+      } catch (NumberFormatException ex) {
+          lblBetError.setText(betError);
+          System.out.println(ex);
+      }
     }
   }
 }

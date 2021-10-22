@@ -17,9 +17,12 @@ public class PeakWindow extends JFrame implements ActionListener{
   JLabel lblSuccess;
   JLabel lblNextCard;
   JLabel lblFail;
+  JLabel lblLoseLife;
 
   CardLayout layout = new CardLayout();
   Random random;
+
+  Player player = Player.getInstance();
 
   DeckOfCards deck = GameWindow.deck;
 
@@ -38,10 +41,11 @@ public class PeakWindow extends JFrame implements ActionListener{
     base.add(fail, "fail");
 
 
-    if (random.nextBoolean()){
+    if (isSuccessful()){
       layout.show(base, "success");
     }
     else {
+      
       layout.show(base, "fail");
     }
     
@@ -73,11 +77,25 @@ public class PeakWindow extends JFrame implements ActionListener{
     pnlFail.setLayout(null);
     add(pnlFail);
 
-    lblFail = new JLabel("Your peak was unsuccessful, [some punishment]");
+    lblFail = new JLabel("Your peak was unsuccessful, you lost a life");
     lblFail.setBounds(0, 15, 300, 25);
     pnlFail.add(lblFail);
+
+    lblLoseLife = new JLabel("You have " + player.getLives() + " lives left!");
+    lblLoseLife.setBounds(0, 50, 300, 25);
+    pnlFail.add(lblLoseLife);
     
     return pnlFail;
+  }
+
+  public boolean isSuccessful(){
+    if (random.nextBoolean()){
+      return true;
+    }
+    else {
+      player.loseLife();
+      return false;
+    }
   }
 
 }
