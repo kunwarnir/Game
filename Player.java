@@ -29,6 +29,10 @@ public class Player{
     historyValues.add(money);
   }
 
+  public static Player getInstance(){
+    return INSTANCE;
+  }
+
   public Player (String username){
     this.username = username;
   }
