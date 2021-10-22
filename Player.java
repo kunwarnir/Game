@@ -69,6 +69,21 @@ public class Player{
     historyGames.add(won);
   }
 
+  public String getGameStats(){
+    String games = "";
+
+    for (int i =1; i < historyGames.size(); i++){
+      if (historyGames.get(i)){
+        games+= "Game " + i + ": Won\n";
+      }
+      else {
+        games+= "Game " + i + ": Lost\n";
+      }
+    }
+
+    return "You played " + (historyGames.size()-1) + " games\n" + games;
+  }
+
   public void addCard(Card card){
     hand.add(card);
   }
@@ -90,6 +105,14 @@ public class Player{
     }
 
     return value;
+  }
+
+  public String getFileMessage(){
+    String message = "*********************\n" + username + 
+        getGameStats() + "You started with: " + initialValue +
+        "\nYou ended with: " + currentValue + "\n*********************\n";
+
+    return message;
   }
 
   public int getHandSum(){

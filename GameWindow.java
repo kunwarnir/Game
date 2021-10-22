@@ -255,12 +255,12 @@ public class GameWindow extends JFrame implements ActionListener{
         myOtherFrame.setSize(600, 500); // set frame size
         myOtherFrame.setVisible(true); // display frame
         break;
-      // case "Progress":
-      //   ProgressWindow progressFrame = new ProgressWindow();
+      case "Progress":
+        ProgressWindow progressFrame = new ProgressWindow();
 
-      //   progressFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-      //   progressFrame.setSize(600, 500); // set frame size
-      //   progressFrame.setVisible(true); // display frame
+        progressFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        progressFrame.setSize(600, 500); // set frame size
+        progressFrame.setVisible(true); // display frame
     }
   }
 
