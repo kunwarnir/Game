@@ -5,6 +5,8 @@ import java.util.Random;
 
 public class Player{
 
+  private static final Player INSTANCE = new Player();
+
   private String username;
   private double initialValue;
   private double currentValue;
@@ -12,13 +14,19 @@ public class Player{
   List<Card> hand;
   int sum = 0;
 
-  public Player(String username, double money){
+  private Player(){
+    hand = new ArrayList<Card>();
+    
+  }
+
+  public void setUsername(String username){
     this.username = username;
+  }
+
+  public void setMoney(double money){
     initialValue = money;
     currentValue = money;
     historyValues.add(money);
-    hand = new ArrayList<Card>();
-    
   }
 
   public Player (String username){
