@@ -21,6 +21,8 @@ public class PeakWindow extends JFrame implements ActionListener{
   CardLayout layout = new CardLayout();
   Random random;
 
+  DeckOfCards deck = GameWindow.deck;
+
   public PeakWindow(){
     super("Peak Window");
 
@@ -56,8 +58,12 @@ public class PeakWindow extends JFrame implements ActionListener{
     add(pnlSuccess);
 
     lblSuccess = new JLabel("Your peak was successful, the dealers next card is: ");
-    lblSuccess.setBounds(0, 15, 300, 25);
+    lblSuccess.setBounds(0, 15, 400, 25);
     pnlSuccess.add(lblSuccess);
+
+    lblNextCard = new JLabel(deck.seeTop().toString());
+    lblNextCard.setBounds(0, 50, 300, 25);
+    pnlSuccess.add(lblNextCard);
 
     return pnlSuccess;
   }

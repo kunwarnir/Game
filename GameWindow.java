@@ -50,13 +50,14 @@ public class GameWindow extends JFrame implements ActionListener{
 
   boolean win = false;
 
-  static Player player = LoginWindow.player;
+  // same as the player in the other class because of singleton design pattern
+  static Player player = Player.getInstance();
   static String username = player.getUsername();
 
   static Dealer dealer = new Dealer();
 
   public static Random randomNumber = new Random();
-  public DeckOfCards deck = new DeckOfCards();
+  public static DeckOfCards deck = new DeckOfCards();
 
   CardLayout layout = new CardLayout();
 
@@ -244,7 +245,7 @@ public class GameWindow extends JFrame implements ActionListener{
         PeakWindow myFrame = new PeakWindow();
 
         myFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        myFrame.setSize(300, 100); // set frame size
+        myFrame.setSize(400, 100); // set frame size
         myFrame.setVisible(true); // display frame
         break;
       case "Again":

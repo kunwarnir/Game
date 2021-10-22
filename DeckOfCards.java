@@ -9,8 +9,6 @@ public class DeckOfCards {
   private ArrayList<Card> remaining;
   private Random randomNumber;
 
-  
-
   public DeckOfCards(){
 
     this.deck = new ArrayList<>();
@@ -28,6 +26,8 @@ public class DeckOfCards {
     remaining = deck;
 
   }
+
+  
 
   public DeckOfCards(Card favourite){
 
