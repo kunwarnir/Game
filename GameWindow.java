@@ -315,12 +315,13 @@ public class GameWindow extends JFrame implements ActionListener{
     
     if (isWin()){
       lblEndInfo.setText("Great Job! You won the game");
-      lblEnfInfo.setBounds(400, 50, 200, 50)
+      
     }
     else {
       lblEndInfo.setText("Better luck next time");
     }
-
+// the bounds for that are already set in the file change them there
+    
     layout.show(base, "end");
 
     player.addBet(moneyBet, win);
