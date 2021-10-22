@@ -81,7 +81,7 @@ public class Player{
       }
     }
 
-    return "You played " + (historyGames.size()-1) + " games\n" + games;
+    return " You played " + (historyGames.size()-1) + " games\n" + games;
   }
 
   public void addCard(Card card){
