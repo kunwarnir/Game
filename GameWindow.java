@@ -12,15 +12,18 @@ public class GameWindow extends JFrame implements ActionListener{
   JPanel pnlInitial;
   JPanel pnlGame;
   JPanel pnlEnd;
+  JPanel pnlAgain;
   JPanel game;
   JPanel initial;
   JPanel end;
+  JPanel again;
 
   JLabel lblWelcome;
   JLabel lblWelcome2;
   JLabel lblDealerCards;
   JLabel lblYourCards;
   JLabel lblBet;
+  JLabel lblBetAgain;
   JLabel lblBetError;
   JLabel lblGameLength;
   JLabel lblLengthDefault;
@@ -37,10 +40,12 @@ public class GameWindow extends JFrame implements ActionListener{
   JTextArea txtYourHandValues;
   
   JTextField txtBet;
+  JTextField txtbetAgain;
   JTextField txtGamelength;
   JTextField txtDeckSize;
 
   JButton btnBegin;
+  JButton btnBeginAgain;
   JButton btnBack;
   JButton btnPeak;
   JButton btnHit;
@@ -55,7 +60,9 @@ public class GameWindow extends JFrame implements ActionListener{
   String betError;
 
   double moneyBet;
-  int gameLength;
+  //default game length
+  int gameLength= 21;
+  int deckSize = 1;
   boolean win = false;
 
   // same as the player in the other class because of singleton design pattern
@@ -78,10 +85,13 @@ public class GameWindow extends JFrame implements ActionListener{
     initial = initialPanel();
     game = gamePanel();
     end = endPanel();
+    again = againPanel();
 
     base.add(initial, "initial");
     base.add(game, "game");
     base.add(end, "end");
+    base.add(again, "again");
+
 
     layout.show(base, "initial");
   }
@@ -202,13 +212,13 @@ public class GameWindow extends JFrame implements ActionListener{
     pnlGame.add(btnStand);
 
     btnPeak = new JButton("Peak (50/50)");
-    btnPeak.setBounds(400, 50 , 200, 25);
+    btnPeak.setBounds(100, 400 , 150, 25);
     btnPeak.setActionCommand("Peak");
     btnPeak.addActionListener(this);
     pnlGame.add(btnPeak);
 
     return pnlGame;
-    }
+  }
 
   public JPanel endPanel(){
   
@@ -251,10 +261,78 @@ public class GameWindow extends JFrame implements ActionListener{
   return pnlEnd;
   }
   
+  public JPanel againPanel(){
+
+    pnlAgain = new JPanel();
+    pnlAgain.setLayout(null);
+    add(pnlAgain);
+
+    lblWelcome = new JLabel("Welcome bacl to the game " + player.getUsername() + "! You will be playing with the same settings");
+    lblWelcome.setBounds(80, 20, 600, 50);
+    pnlAgain.add(lblWelcome);
+
+    lblWelcome2 = new JLabel("You have " + player.getCurrentValue() + " $, click 'begin' to start");
+    lblWelcome2.setBounds(155, 45, 600, 50);
+    pnlAgain.add(lblWelcome2);
+
+    lblBetAgain = new JLabel("Enter How Much Money You Want to bet");
+    lblBetAgain.setBounds(150, 100, 3000, 25);
+    pnlAgain.add(lblBetAgain);
+
+    lblBetError = new JLabel("   ");
+    lblBetError.setBounds(200, 160, 3000, 25);
+    pnlAgain.add(lblBetError);
+
+    txtbetAgain = new JTextField(20);
+    txtbetAgain.setBounds(250, 135, 100, 25);
+    pnlAgain.add(txtbetAgain);
+
+    lblGameLength = new JLabel("Game Length: " + gameLength);
+    lblGameLength.setBounds(50, 200, 190, 25);
+    pnlAgain.add(lblGameLength);
+
+    lblDeckSize = new JLabel("Deck Size: " + deckSize);
+    lblDeckSize.setBounds(375, 200, 300, 25);
+    pnlAgain.add(lblDeckSize);
+
+    btnBeginAgain = new JButton("Begin");
+    btnBeginAgain.setBounds(250, 400, 100, 50);
+    btnBeginAgain.setActionCommand("BeginAgain");
+    btnBeginAgain.addActionListener(this);
+    pnlAgain.add(btnBeginAgain);
+
+    return pnlAgain;
+
+  }
+
   @Override
   public void actionPerformed(ActionEvent e) {
     switch (e.getActionCommand()){
       case "Begin":
+        
+        if (txtGamelength.getText().isEmpty()){
+          gameLength = 21;
+        }
+        else {
+          try {
+            gameLength = Integer.parseInt(txtGamelength.getText());
+          } catch (NumberFormatException ex){
+            System.out.println(ex + " Game Length");
+          }
+        }
+
+        if (txtDeckSize.getText().isEmpty()){
+          deck = new DeckOfCards();
+        }
+        else {
+          try {
+            deckSize = Integer.parseInt(txtDeckSize.getText());
+            deck = new SpecialDeck(deckSize);
+          } catch (NumberFormatException ex){
+            System.out.println(ex + " Deck Size");
+          }
+        }
+        
         try {
           moneyBet = Double.parseDouble(txtBet.getText());
           if (moneyBet > player.getCurrentValue()){
@@ -262,28 +340,32 @@ public class GameWindow extends JFrame implements ActionListener{
             lblBetError.setText(betError);
           }
           else {
-            try {
-              gameLength = Integer.parseInt(txtGamelength.getText());
-              System.out.println(gameLength);
-              layout.show(base, "game");
-              beginGame();
-              if (!keepPlaying(gameLength)){
-              endGame();
-              }
-            } catch (Exception ex){
-              System.out.println("Cant be empty");
-            }
-            
-            if (!keepPlaying(gameLength)){
-              endGame();
-            }
+            beginGame();
+            layout.show(base, "game");
+            // 
           }
         }catch (NumberFormatException ex) {
           betError = "Please enter a valid number!";
           lblBetError.setText(betError);
-          System.out.println(ex);
+          System.out.println(ex + " betting");
         }
-        
+        break;
+      case "BeginAgain":
+        try {
+          moneyBet = Double.parseDouble(txtbetAgain.getText());
+          if (moneyBet > player.getCurrentValue()){
+            betError = "You cannot bet more money than you have!";
+            lblBetError.setText(betError);
+          }
+          else {
+            layout.show(base, "game");
+            beginGame();
+          }
+        }catch (NumberFormatException ex) {
+          betError = "Please enter a valid number!";
+          lblBetError.setText(betError);
+          System.out.println(ex + " betting");
+        }
         break;
       case "Hit":
         hit();
@@ -305,11 +387,7 @@ public class GameWindow extends JFrame implements ActionListener{
         myFrame.setVisible(true); // display frame
         break;
       case "Again":
-        GameWindow myOtherFrame = new GameWindow();
-
-        myOtherFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        myOtherFrame.setSize(600, 500); // set frame size
-        myOtherFrame.setVisible(true); // display frame
+        layout.show(base, "again");
         break;
       case "Progress":
         ProgressWindow progressFrame = new ProgressWindow();
@@ -317,6 +395,16 @@ public class GameWindow extends JFrame implements ActionListener{
         progressFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         progressFrame.setSize(600, 500); // set frame size
         progressFrame.setVisible(true); // display frame
+        break;
+      case "Back":
+        LoginWindow loginFrame = new LoginWindow(); // create LabelFrame
+        loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        loginFrame.setSize(600, 500); // set frame size
+        loginFrame.setVisible(true); // display frame
+        break;
+      default:
+        break;
+        
     }
   }
 
