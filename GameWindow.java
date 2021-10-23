@@ -22,6 +22,8 @@ public class GameWindow extends JFrame implements ActionListener{
   JLabel lblYourCards;
   JLabel lblBet;
   JLabel lblBetError;
+  JLabel lblGameLimit;
+  JLabel lblDefault;
   JLabel lblDealerTotal;
   JLabel lblYourTotal;
 
@@ -89,7 +91,7 @@ public class GameWindow extends JFrame implements ActionListener{
     pnlInitial.add(lblWelcome);
 
     lblWelcome2 = new JLabel("You have " + player.getCurrentValue() + " $, click 'begin' to start");
-    lblWelcome2.setBounds(170, 55, 600, 50);
+    lblWelcome2.setBounds(155, 45, 600, 50);
     pnlInitial.add(lblWelcome2);
 
     lblBet = new JLabel("Enter How Much Money You Want to bet");
@@ -97,20 +99,28 @@ public class GameWindow extends JFrame implements ActionListener{
     pnlInitial.add(lblBet);
 
     lblBetError = new JLabel("   ");
-    lblBetError.setBounds(120, 200, 3000, 25);
+    lblBetError.setBounds(200, 160, 3000, 25);
     pnlInitial.add(lblBetError);
 
     txtBet = new JTextField(20);
-    txtBet.setBounds(200, 135, 165, 25);
+    txtBet.setBounds(250, 135, 165, 25);
     pnlInitial.add(txtBet);
 
+    lblGameLimit = new JLabel("Enter desired game length ");
+    lblGameLimit.setBounds(50, 260, 3000, 25);
+    pnlInitial.add(lblGameLimit);
+
     txtGamelength = new JTextField(50);
-    txtGamelength.setBounds(475, 200, 60, 25);
+    txtGamelength.setBounds(70, 300, 100, 25);
     pnlInitial.add(txtGamelength);
-  
+
+    lblDefault = new JLabel("(default is 21)");
+    lblDefault.setBounds(70, 325, 3000, 25);
+    pnlInitial.add(lblDefault);
+    
 
     btnBegin = new JButton("Begin");
-    btnBegin.setBounds(20, 200 , 100, 25);
+    btnBegin.setBounds(240, 200 , 100, 25);
     btnBegin.setActionCommand("Begin");
     btnBegin.addActionListener(this);
     pnlInitial.add(btnBegin);

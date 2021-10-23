@@ -1,8 +1,8 @@
 public class SpecialDeck extends DeckOfCards {
 
-    public SpecialDeck(){
+    public SpecialDeck(int length){
       super();
       
-
+      
     }
 }
