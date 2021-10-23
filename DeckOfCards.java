@@ -30,30 +30,8 @@ public class DeckOfCards {
     remaining = deck;
   }
 
-  
-
-  public DeckOfCards(Card favourite){
-
-    Card newCard;
-
-    this.deck = new ArrayList<>();
-    this.remaining = new ArrayList<>();
-
-    deck.clear();
-
-    for (Card.Suits suit: Card.Suits.values()){
-      for (Card.Ranks rank: Card.Ranks.values()){
-        // System.out.println(suit + " , " + rank);
-        newCard = new Card(suit, rank);
-        this.deck.add(newCard);
-      }
-    }
-
-    remaining = deck;
-    for (int i = 0; i < deck.size(); i++){
-      System.out.println(deck.get(i));
-    }
-
+  public Card cardAtIndex(int index){
+    return deck.get(index);
   }
 
   public void shuffleDeck(){

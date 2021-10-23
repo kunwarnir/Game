@@ -8,8 +8,5 @@ public class SpecialDeck extends DeckOfCards {
       for (int i = 0; i< length; i++){
         setDeck();
       }
-      
     }
-
-    
 }

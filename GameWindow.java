@@ -59,7 +59,7 @@ public class GameWindow extends JFrame implements ActionListener{
   static Dealer dealer = new Dealer();
 
   public static Random randomNumber = new Random();
-  public static DeckOfCards deck = new DeckOfCards();
+  public static SpecialDeck deck = new SpecialDeck(4);
 
   CardLayout layout = new CardLayout();
 
