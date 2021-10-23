@@ -118,7 +118,6 @@ public class GameWindow extends JFrame implements ActionListener{
     lblDefault.setBounds(70, 325, 3000, 25);
     pnlInitial.add(lblDefault);
     
-
     btnBegin = new JButton("Begin");
     btnBegin.setBounds(240, 200 , 100, 25);
     btnBegin.setActionCommand("Begin");

@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class DeckOfCards {
 
-  private ArrayList<Card> deck;
+  public static ArrayList<Card> deck;
   private ArrayList<Card> pulled;
   private ArrayList<Card> remaining;
   private Random randomNumber;
@@ -15,7 +15,11 @@ public class DeckOfCards {
     this.remaining = new ArrayList<>();
 
     deck.clear();
+    setDeck();   
 
+  }
+
+  public void setDeck(){
     for (Card.Suits suit: Card.Suits.values()){
       for (Card.Ranks rank: Card.Ranks.values()){
         // System.out.println(suit + " , " + rank);
@@ -24,7 +28,6 @@ public class DeckOfCards {
       }
     }
     remaining = deck;
-
   }
 
   
