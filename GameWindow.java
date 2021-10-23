@@ -30,9 +30,9 @@ public class GameWindow extends JFrame implements ActionListener{
   JLabel lblCurrentMoneyValues;
   JLabel lblYourHandInfo;
   JTextArea txtYourHandValues;
-
+  
   JTextField txtBet;
-
+  JTextField txtGamelength;
   JButton btnBegin;
   JButton btnPeak;
   JButton btnHit;
@@ -47,7 +47,7 @@ public class GameWindow extends JFrame implements ActionListener{
   String betError;
 
   double moneyBet;
-
+  int gameLength;
   boolean win = false;
 
   // same as the player in the other class because of singleton design pattern
@@ -89,23 +89,28 @@ public class GameWindow extends JFrame implements ActionListener{
     pnlInitial.add(lblWelcome);
 
     lblWelcome2 = new JLabel("You have " + player.getCurrentValue() + " $, click 'begin' to start");
-    lblWelcome2.setBounds(150, 50, 600, 50);
+    lblWelcome2.setBounds(170, 55, 600, 50);
     pnlInitial.add(lblWelcome2);
 
     lblBet = new JLabel("Enter How Much Money You Want to bet");
-    lblBet.setBounds(120, 115, 3000, 25);
+    lblBet.setBounds(150, 100, 3000, 25);
     pnlInitial.add(lblBet);
 
     lblBetError = new JLabel("   ");
-    lblBetError.setBounds(120, 175, 3000, 25);
+    lblBetError.setBounds(120, 200, 3000, 25);
     pnlInitial.add(lblBetError);
 
     txtBet = new JTextField(20);
-    txtBet.setBounds(200, 150, 165, 25);
+    txtBet.setBounds(200, 135, 165, 25);
     pnlInitial.add(txtBet);
 
+    txtGamelength = new JTextField(50);
+    txtGamelength.setBounds(475, 200, 60, 25);
+    pnlInitial.add(txtGamelength);
+  
+
     btnBegin = new JButton("Begin");
-    btnBegin.setBounds(250, 237 , 100, 25);
+    btnBegin.setBounds(20, 200 , 100, 25);
     btnBegin.setActionCommand("Begin");
     btnBegin.addActionListener(this);
     pnlInitial.add(btnBegin);
@@ -176,7 +181,7 @@ public class GameWindow extends JFrame implements ActionListener{
   pnlEnd.add(lblEndInfo);
 
   lblCurrentMoneyInfo = new JLabel("The amount of money you currently have is:");
-  lblCurrentMoneyInfo.setBounds(10, 50, 200, 50);
+  lblCurrentMoneyInfo.setBounds(10, 50, 400, 50);
   pnlEnd.add(lblCurrentMoneyInfo);
 
   lblCurrentMoneyValues = new JLabel(String.valueOf(player.getCurrentValue()));
@@ -217,9 +222,19 @@ public class GameWindow extends JFrame implements ActionListener{
             lblBetError.setText(betError);
           }
           else {
-            layout.show(base, "game");
-            beginGame();
-            if (!keepPlaying()){
+            try {
+              gameLength = Integer.parseInt(txtGamelength.getText());
+              System.out.println(gameLength);
+              layout.show(base, "game");
+              beginGame();
+              if (!keepPlaying(gameLength)){
+              endGame();
+              }
+            } catch (Exception ex){
+              System.out.println("Cant be empty");
+            }
+            
+            if (!keepPlaying(gameLength)){
               endGame();
             }
           }
@@ -228,10 +243,11 @@ public class GameWindow extends JFrame implements ActionListener{
           lblBetError.setText(betError);
           System.out.println(ex);
         }
+        
         break;
       case "Hit":
         hit();
-        if (!keepPlaying()){
+        if (!keepPlaying(gameLength)){
           endGame();
         }
 
@@ -268,13 +284,13 @@ public class GameWindow extends JFrame implements ActionListener{
     
     boolean win = false;
     
-    if (player.distanceFrom21() < 0 && dealer.distanceFrom21() > 0){
+    if (player.distanceFrom(gameLength) < 0 && dealer.distanceFrom(gameLength) > 0){
       win = false;
     }
-    else if (dealer.distanceFrom21() < 0 && player.distanceFrom21() > 0){
+    else if (dealer.distanceFrom(gameLength) < 0 && player.distanceFrom(gameLength) > 0){
       win = true;
     }
-    else if (player.distanceFrom21() < dealer.distanceFrom21()){
+    else if (player.distanceFrom(gameLength) < dealer.distanceFrom(gameLength)){
       win = true;
     }
     else {
@@ -285,8 +301,8 @@ public class GameWindow extends JFrame implements ActionListener{
     
   }
 
-  public boolean keepPlaying(){
-    if (player.getHandSum() >= 21 || dealer.getHandSum() >= 21){
+  public boolean keepPlaying(int length){
+    if (player.getHandSum() >= length || dealer.getHandSum() >= length){
       return false;
     }
     else {
@@ -316,7 +332,8 @@ public class GameWindow extends JFrame implements ActionListener{
     
     if (isWin()){
       lblEndInfo.setText("Great Job! You won the game");
-      
+      lblEndInfo.setBounds(200, 10, 400, 50);
+      lblEndInfo.setForeground(Color.GREEN);
     }
     else {
       lblEndInfo.setText("Better luck next time");
@@ -325,8 +342,9 @@ public class GameWindow extends JFrame implements ActionListener{
     
     layout.show(base, "end");
 
-    player.addGame(moneyBet, win);
+    player.addGame(moneyBet, isWin());
 
+    lblCurrentMoneyValues.setText(String.valueOf(player.getCurrentValue()));
     lblYourHandInfo.setText("You had a score of: " + player.getHandSum());
     txtYourHandValues.setText(player.toString());
 

@@ -29,7 +29,7 @@ public class Player{
     initialValue = money;
     currentValue = money;
     historyValues.add(money);
-    historyGames.add(null);
+    historyGames.add(false);
   }
 
   public static Player getInstance(){
@@ -60,20 +60,26 @@ public class Player{
 
     if (won){
         currentValue += bet;
+        historyGames.add(true);
     }
     else {
         currentValue -= bet;
+        historyGames.add(false);
     }
 
     historyValues.add(currentValue);
-    historyGames.add(won);
+    
+    
   }
 
   public String getGameStats(){
     String games = "";
 
-    for (int i =1; i < historyGames.size(); i++){
-      if (historyGames.get(i)){
+    for (int i = 0; i < historyGames.size(); i++){
+      if (i == 0){
+        games = "";
+      }
+      else if (historyGames.get(i)){
         games+= "Game " + i + ": Won\n";
       }
       else {
@@ -128,8 +134,8 @@ public class Player{
     sum = 0;
   }
 
-  public int distanceFrom21(){
-    return 21 - sum;
+  public int distanceFrom(int length){
+    return length - sum;
   }
 
   public void clearHand(){

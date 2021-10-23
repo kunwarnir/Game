@@ -49,8 +49,8 @@ public class Dealer{
     sum = 0;
   }
 
-  public int distanceFrom21(){
-    return 21 - sum;
+  public int distanceFrom(int length){
+    return length - sum;
   }
 
   public void clearHand(){

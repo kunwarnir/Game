@@ -1,0 +1,15 @@
+*********************
+Kunwar45 You played 2 games
+Game 1: Won
+You started with: 444.0
+You ended with: 84.0
+*********************
+*********************
+Kunwar You played 4 games
+Game 1: Won
+Game 2: Lost
+Game 3: Lost
+Game 4: Lost
+You started with: 500.0
+You ended with: 0.0
+*********************
