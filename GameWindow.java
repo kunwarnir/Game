@@ -22,8 +22,11 @@ public class GameWindow extends JFrame implements ActionListener{
   JLabel lblYourCards;
   JLabel lblBet;
   JLabel lblBetError;
-  JLabel lblGameLimit;
-  JLabel lblDefault;
+  JLabel lblGameLength;
+  JLabel lblLengthDefault;
+  JLabel lblDeckSize;
+  JLabel lblDeckSize2;
+  JLabel lblDeckDefault;
   JLabel lblDealerTotal;
   JLabel lblYourTotal;
 
@@ -35,7 +38,10 @@ public class GameWindow extends JFrame implements ActionListener{
   
   JTextField txtBet;
   JTextField txtGamelength;
+  JTextField txtDeckSize;
+
   JButton btnBegin;
+  JButton btnBack;
   JButton btnPeak;
   JButton btnHit;
   JButton btnStand;
@@ -54,14 +60,14 @@ public class GameWindow extends JFrame implements ActionListener{
 
   // same as the player in the other class because of singleton design pattern
   static Player player = Player.getInstance();
-  static String username = player.getUsername();
-
   static Dealer dealer = new Dealer();
 
   public static Random randomNumber = new Random();
-  public static SpecialDeck deck = new SpecialDeck(4);
+  public static DeckOfCards deck;
 
   CardLayout layout = new CardLayout();
+
+  Font font2 = new Font("Serif", Font.PLAIN, 12);
 
   public GameWindow(){
     super("Black Jack");
@@ -86,7 +92,7 @@ public class GameWindow extends JFrame implements ActionListener{
     pnlInitial.setLayout(null);
     add(pnlInitial);
 
-    lblWelcome = new JLabel("Welcome to the game " + username + "! You will be playing black jack.");
+    lblWelcome = new JLabel("Welcome to the game " + player.getUsername() + "! You will be playing black jack.");
     lblWelcome.setBounds(100, 20, 600, 50);
     pnlInitial.add(lblWelcome);
 
@@ -103,26 +109,51 @@ public class GameWindow extends JFrame implements ActionListener{
     pnlInitial.add(lblBetError);
 
     txtBet = new JTextField(20);
-    txtBet.setBounds(250, 135, 165, 25);
+    txtBet.setBounds(250, 135, 100, 25);
     pnlInitial.add(txtBet);
 
-    lblGameLimit = new JLabel("Enter desired game length ");
-    lblGameLimit.setBounds(50, 260, 3000, 25);
-    pnlInitial.add(lblGameLimit);
+    lblGameLength = new JLabel("Enter desired game length");
+    lblGameLength.setBounds(50, 200, 190, 25);
+    pnlInitial.add(lblGameLength);
 
     txtGamelength = new JTextField(50);
-    txtGamelength.setBounds(70, 300, 100, 25);
+    txtGamelength.setBounds(95, 225, 100, 25);
     pnlInitial.add(txtGamelength);
 
-    lblDefault = new JLabel("(default is 21)");
-    lblDefault.setBounds(70, 325, 3000, 25);
-    pnlInitial.add(lblDefault);
+    lblLengthDefault = new JLabel("(default is 21)");
+    lblLengthDefault.setFont(font2);
+    lblLengthDefault.setBounds(97, 250, 100, 25);
+    pnlInitial.add(lblLengthDefault);
+
+    lblDeckSize = new JLabel("Enter how many decks");
+    lblDeckSize.setBounds(375, 185, 300, 25);
+    pnlInitial.add(lblDeckSize);
+
+    lblDeckSize2 = new JLabel("you want to play with");
+    lblDeckSize2.setBounds(375, 200, 300, 25);
+    pnlInitial.add(lblDeckSize2);
+
+    txtDeckSize = new JTextField(50);
+    txtDeckSize.setBounds(400, 225, 100, 25);
+    pnlInitial.add(txtDeckSize);
+
+    lblDeckDefault = new JLabel("(default is one deck)");
+    lblDeckDefault.setFont(font2);
+    lblDeckDefault.setBounds(385, 250, 150, 25);
+    pnlInitial.add(lblDeckDefault);
     
     btnBegin = new JButton("Begin");
-    btnBegin.setBounds(240, 200 , 100, 25);
+    btnBegin.setBounds(400, 400, 100, 50);
     btnBegin.setActionCommand("Begin");
     btnBegin.addActionListener(this);
     pnlInitial.add(btnBegin);
+
+    btnBack = new JButton("Back");
+    btnBack.setBounds(100, 400, 100, 50);
+    btnBack.setActionCommand("Back");
+    btnBack.addActionListener(this);
+    pnlInitial.add(btnBack);
+
 
     return pnlInitial;
 
