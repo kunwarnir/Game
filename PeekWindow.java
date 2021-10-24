@@ -4,7 +4,7 @@ import java.awt.event.ActionListener;
 import java.awt.*;
 import java.util.Random;
 
-public class PeakWindow extends JFrame implements ActionListener{
+public class PeekWindow extends JFrame implements ActionListener{
 
   Container base;
   
@@ -26,8 +26,8 @@ public class PeakWindow extends JFrame implements ActionListener{
 
   DeckOfCards deck = GameWindow.deck;
 
-  public PeakWindow(){
-    super("Peak Window");
+  public PeekWindow(){
+    super("Peek Window");
 
     random = new Random();
 
@@ -63,12 +63,12 @@ public class PeakWindow extends JFrame implements ActionListener{
     add(pnlSuccess);
 
     lblSuccess = new JLabel("Your peak was successful, the dealers next card is: ");
-    lblSuccess.setBounds(0, 15, 500, 25);
-    lblSuccess.setForeground(Color.BLACK);
+    lblSuccess.setFont(new Font("Helvetica", Font.BOLD, 14));
+    lblSuccess.setBounds(35, 15, 500, 25);
     pnlSuccess.add(lblSuccess);
 
     lblNextCard = new JLabel(deck.seeTop().toString());
-    lblNextCard.setBounds(0, 50, 300, 25);
+    lblNextCard.setBounds(175, 50, 300, 25);
     pnlSuccess.add(lblNextCard);
 
     return pnlSuccess;
@@ -77,15 +77,16 @@ public class PeakWindow extends JFrame implements ActionListener{
   public JPanel failPanel(){
     pnlFail = new JPanel();
     pnlFail.setLayout(null);
-    pnlFail.setBackground(Color.RED);
+    pnlFail.setBackground(Color.decode("#FD1A1A"));
     add(pnlFail);
 
     lblFail = new JLabel("Your peak was unsuccessful, you lost a life");
-    lblFail.setBounds(0, 15, 500, 25);
+    lblFail.setFont(new Font("Arial", Font.BOLD, 14));
+    lblFail.setBounds(75, 15, 500, 25);
     pnlFail.add(lblFail);
 
     lblLoseLife = new JLabel("You have " + player.getLives() + " lives left!");
-    lblLoseLife.setBounds(0, 50, 500, 25);
+    lblLoseLife.setBounds(175, 50, 500, 25);
     pnlFail.add(lblLoseLife);
     
     return pnlFail;

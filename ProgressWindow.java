@@ -8,6 +8,7 @@ public class ProgressWindow extends JFrame implements ActionListener{
   JPanel panel;
   JLabel lblInfo;
   JButton btnDownload;
+  JButton btnPlayAgain;
   
   String fileMessage;
   File file = new File("progress.txt");
@@ -26,8 +27,14 @@ public class ProgressWindow extends JFrame implements ActionListener{
     lblInfo.setBounds(200, 30, 300, 25);
     panel.add(lblInfo);
 
+    btnPlayAgain = new JButton("Play");
+    btnPlayAgain.setBounds(66, 400 , 200, 50);
+    btnPlayAgain.setActionCommand("Play");
+    btnPlayAgain.addActionListener(this);
+    panel.add(btnPlayAgain);
+
     btnDownload = new JButton("Download");
-    btnDownload.setBounds(250, 237 , 100, 25);
+    btnDownload.setBounds(332, 400, 200, 50);
     btnDownload.setActionCommand("Download");
     btnDownload.addActionListener(this);
     panel.add(btnDownload);
@@ -44,6 +51,15 @@ public class ProgressWindow extends JFrame implements ActionListener{
         } catch (IOException ex){
           System.out.println("IOException: " + ex);
         }
+        break;
+      case "Play":
+        LoginWindow myFrame = new LoginWindow(); // create LabelFrame
+        myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        myFrame.setSize(600, 500); // set frame size
+        myFrame.setVisible(true); // display frame
+        break;
+      default:
+        break;        
     }
   }
 

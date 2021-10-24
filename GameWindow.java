@@ -32,6 +32,9 @@ public class GameWindow extends JFrame implements ActionListener{
   JLabel lblDeckDefault;
   JLabel lblDealerTotal;
   JLabel lblYourTotal;
+  JLabel lblGameInfo;
+  JLabel lblBank;
+  JLabel lblYourBet;
 
   JLabel lblEndInfo;
   JLabel lblCurrentMoneyInfo;
@@ -74,6 +77,7 @@ public class GameWindow extends JFrame implements ActionListener{
 
   CardLayout layout = new CardLayout();
 
+  Font titleFont = new Font("Helvetica", Font.BOLD, 16);
   Font font2 = new Font("Serif", Font.PLAIN, 12);
 
   public GameWindow(){
@@ -164,7 +168,6 @@ public class GameWindow extends JFrame implements ActionListener{
     btnBack.addActionListener(this);
     pnlInitial.add(btnBack);
 
-
     return pnlInitial;
 
   }
@@ -175,20 +178,25 @@ public class GameWindow extends JFrame implements ActionListener{
     pnlGame.setLayout(null);
     add(pnlGame);
 
+    lblGameInfo = new JLabel("Black Jack");
+    lblGameInfo.setFont(titleFont);
+    lblGameInfo.setBounds(250, 15, 600, 50);
+    pnlGame.add(lblGameInfo);
+
     lblDealerCards = new JLabel("The dealers cards are: ");
-    lblDealerCards.setBounds(10, 15, 200, 50);
+    lblDealerCards.setBounds(10, 50, 200, 50);
     pnlGame.add(lblDealerCards);
 
     txtDealerCards = new JTextArea("The Dealers Cards will appear here");
-    txtDealerCards.setBounds(10, 50, 150, 150);
+    txtDealerCards.setBounds(10, 85, 175, 225);
     pnlGame.add(txtDealerCards);
 
     lblYourCards = new JLabel("Your cards are: ");
-    lblYourCards.setBounds(200, 15, 200, 50);
+    lblYourCards.setBounds(215, 50, 200, 50);
     pnlGame.add(lblYourCards);
 
     txtYourCards = new JTextArea("Your cards will appear here");
-    txtYourCards.setBounds(200, 50, 150, 200);
+    txtYourCards.setBounds(215, 85, 175, 225);
     pnlGame.add(txtYourCards);
 
     lblDealerTotal = new JLabel("The dealers total is: " + dealer.getHandSum());
@@ -196,24 +204,32 @@ public class GameWindow extends JFrame implements ActionListener{
     pnlGame.add(lblDealerTotal);
 
     lblYourTotal = new JLabel("Your total is: " + player.getHandSum());
-    lblYourTotal.setBounds(200, 300, 200, 50);
+    lblYourTotal.setBounds(215, 300, 200, 50);
     pnlGame.add(lblYourTotal);
 
-    btnHit = new JButton("Hit");
-    btnHit.setBounds(450, 125 , 100, 25);
+    lblBank = new JLabel("You have a total of: " + player.getCurrentValue() + "$");
+    lblBank.setBounds(400, 85, 200, 50);
+    pnlGame.add(lblBank);
+
+    lblYourBet = new JLabel("Your bet is: " + moneyBet + "$");
+    lblYourBet.setBounds(400, 105, 200, 50);
+    pnlGame.add(lblYourBet);
+
+    btnHit = new JButton("HIT");
+    btnHit.setBounds(445, 165, 100, 50);
     btnHit.setActionCommand("Hit");
     btnHit.addActionListener(this);
     pnlGame.add(btnHit);
 
-    btnStand = new JButton("Stand");
-    btnStand.setBounds(450, 175 , 100, 25);
+    btnStand = new JButton("STAND");
+    btnStand.setBounds(445, 240, 100, 50);
     btnStand.setActionCommand("Stand");
     btnStand.addActionListener(this);
     pnlGame.add(btnStand);
 
-    btnPeak = new JButton("Peak (50/50)");
-    btnPeak.setBounds(100, 400 , 150, 25);
-    btnPeak.setActionCommand("Peak");
+    btnPeak = new JButton("Peek (50/50)");
+    btnPeak.setBounds(225, 400 , 150, 50);
+    btnPeak.setActionCommand("Peek");
     btnPeak.addActionListener(this);
     pnlGame.add(btnPeak);
 
@@ -227,7 +243,8 @@ public class GameWindow extends JFrame implements ActionListener{
   add(pnlEnd);
 
   lblEndInfo = new JLabel();
-  lblEndInfo.setBounds(250, 15, 200, 50);
+  lblEndInfo.setFont(titleFont);
+  lblEndInfo.setBounds(200, 10, 400, 50);
   pnlEnd.add(lblEndInfo);
 
   lblCurrentMoneyInfo = new JLabel("The amount of money you currently have is:");
@@ -267,7 +284,7 @@ public class GameWindow extends JFrame implements ActionListener{
     pnlAgain.setLayout(null);
     add(pnlAgain);
 
-    lblWelcome = new JLabel("Welcome bacl to the game " + player.getUsername() + "! You will be playing with the same settings");
+    lblWelcome = new JLabel("Welcome back to the game " + player.getUsername() + "! You will be playing with the same settings");
     lblWelcome.setBounds(80, 20, 600, 50);
     pnlAgain.add(lblWelcome);
 
@@ -379,11 +396,11 @@ public class GameWindow extends JFrame implements ActionListener{
         endGame();
 
         break;
-      case "Peak":
-        PeakWindow myFrame = new PeakWindow();
+      case "Peek":
+        PeekWindow myFrame = new PeekWindow();
 
         myFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        myFrame.setSize(400, 100); // set frame size
+        myFrame.setSize(500, 100); // set frame size
         myFrame.setVisible(true); // display frame
         break;
       case "Again":
@@ -451,6 +468,11 @@ public class GameWindow extends JFrame implements ActionListener{
     txtDealerCards.setText(dealerCards); 
     txtYourCards.setText(yourCards);
 
+    lblBank.setText("You have a total of: " + player.getCurrentValue() + "$");
+    lblYourBet.setText("Your bet is: " + moneyBet + "$");
+
+    lblWelcome2.setText("You have " + player.getCurrentValue() + " $, click 'begin' to start");
+
     lblDealerTotal.setText("The dealers total is: " + dealer.getHandSum());
     lblYourTotal.setText("Your total is: " + player.getHandSum());  
 
@@ -460,13 +482,10 @@ public class GameWindow extends JFrame implements ActionListener{
     
     if (isWin()){
       lblEndInfo.setText("Great Job! You won the game");
-      lblEndInfo.setBounds(200, 10, 400, 50);
-      lblEndInfo.setForeground(Color.GREEN);
     }
     else {
       lblEndInfo.setText("Better luck next time");
     }
-// the bounds for that are already set in the file change them there
     
     layout.show(base, "end");
 

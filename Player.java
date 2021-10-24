@@ -18,7 +18,7 @@ public class Player{
 
   private Player(){
     hand = new ArrayList<Card>();
-    lives = 2;
+    lives = 1;
   }
 
   public void setUsername(String username){
