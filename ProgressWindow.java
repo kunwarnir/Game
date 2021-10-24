@@ -1,5 +1,6 @@
 import java.io.*;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -7,8 +8,10 @@ public class ProgressWindow extends JFrame implements ActionListener{
 
   JPanel panel;
   JLabel lblInfo;
+  JLabel lblTitle;
   JButton btnDownload;
   JButton btnPlayAgain;
+  JTextArea txtYourStats;
   
   String fileMessage;
   File file = new File("progress.txt");
@@ -17,24 +20,33 @@ public class ProgressWindow extends JFrame implements ActionListener{
 
   public ProgressWindow(){
 
-    super("ProgressWindow");
+    super("Progress Window");
 
     panel = new JPanel();
     panel.setLayout(null);
     add(panel);
 
-    lblInfo = new JLabel("This is your progress");
-    lblInfo.setBounds(200, 30, 300, 25);
+    lblTitle = new JLabel("Your Progress");
+    lblTitle.setBounds(225, 15, 150, 25);
+    lblTitle.setFont(new Font("Helvetica", Font.BOLD, 16));
+    panel.add(lblTitle);
+
+    lblInfo = new JLabel("This are your stats:");
+    lblInfo.setBounds(75, 50, 300, 25);
     panel.add(lblInfo);
 
-    btnPlayAgain = new JButton("Play");
-    btnPlayAgain.setBounds(66, 400 , 200, 50);
+    txtYourStats = new JTextArea(player.getFileMessage());
+    txtYourStats.setBounds(66, 85, 200, 225);
+    panel.add(txtYourStats);
+
+    btnPlayAgain = new JButton("Play Again");
+    btnPlayAgain.setBounds(332, 400 , 200, 50);
     btnPlayAgain.setActionCommand("Play");
     btnPlayAgain.addActionListener(this);
     panel.add(btnPlayAgain);
 
     btnDownload = new JButton("Download");
-    btnDownload.setBounds(332, 400, 200, 50);
+    btnDownload.setBounds(332, 200, 200, 50);
     btnDownload.setActionCommand("Download");
     btnDownload.addActionListener(this);
     panel.add(btnDownload);
