@@ -87,7 +87,7 @@ public class Player{
       }
     }
 
-    return " You played " + (historyGames.size()-1) + " games\n" + games;
+    return "You played " + (historyGames.size()-1) + " games\n" + games;
   }
 
   public void addCard(Card card){
@@ -114,9 +114,8 @@ public class Player{
   }
 
   public String getFileMessage(){
-    String message = "*********************\n" + username + 
-        getGameStats() + "You started with: " + initialValue +
-        "\nYou ended with: " + currentValue + "\n*********************\n";
+    String message = "*********************\n" + "Your username: : " + username + "\n" + getGameStats() + "\nYou started with: " + initialValue +
+        "$\nYou ended with: " + currentValue + "$\n*********************\n";
 
     return message;
   }
