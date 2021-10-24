@@ -14,16 +14,20 @@ public class GameWindow extends JFrame implements ActionListener{
   JPanel pnlEnd;
   JPanel pnlAgain;
   JPanel pnlPeekFail;
+  JPanel pnlContinue;
   JPanel game;
   JPanel initial;
   JPanel end;
   JPanel again;
   JPanel peekFail;
+  JPanel continuePanel;
 
   JLabel lblWelcome;
   JLabel lblWelcome2;
   JLabel lblDealerCards;
   JLabel lblYourCards;
+  JLabel lblDealerCards2;
+  JLabel lblYourCards2;
   JLabel lblBet;
   JLabel lblBetAgain;
   JLabel lblBetError;
@@ -37,7 +41,10 @@ public class GameWindow extends JFrame implements ActionListener{
   JLabel lblDeckError;
   JLabel lblDealerTotal;
   JLabel lblYourTotal;
+  JLabel lblDealerTotal2;
+  JLabel lblYourTotal2;
   JLabel lblGameInfo;
+  JLabel lblGameInfo2;
   JLabel lblBank;
   JLabel lblYourBet;
   JLabel lblPeekFail;
@@ -61,10 +68,13 @@ public class GameWindow extends JFrame implements ActionListener{
   JButton btnStand;
   JButton btnPlayAgain;
   JButton btnViewProgress;
+  JButton btnContinue;
 
   JTextArea txtDealerCards;
+  JTextArea txtDealerCards2;
   String dealerCards = "";
   JTextArea txtYourCards;
+  JTextArea txtYourCards2;
   String yourCards = "";
   String betError;
 
@@ -97,12 +107,14 @@ public class GameWindow extends JFrame implements ActionListener{
     end = endPanel();
     again = againPanel();
     peekFail = peekFailPanel();
+    continuePanel = continuePanel();
 
     base.add(initial, "initial");
     base.add(game, "game");
     base.add(end, "end");
     base.add(again, "again");
     base.add(peekFail, "peekFail");
+    base.add(continuePanel, "continue");
 
 
     layout.show(base, "initial");
@@ -127,7 +139,7 @@ public class GameWindow extends JFrame implements ActionListener{
     pnlInitial.add(lblBet);
 
     lblBetError2 = new JLabel("   ");
-    lblBetError2.setBounds(175, 160, 3000, 25);
+    lblBetError2.setBounds(210, 160, 3000, 25);
     lblBetError2.setFont(font2);
     lblBetError2.setForeground(Color.RED);
     pnlInitial.add(lblBetError2);
@@ -150,7 +162,7 @@ public class GameWindow extends JFrame implements ActionListener{
     pnlInitial.add(lblLengthDefault);
 
     lblLengthError = new JLabel("   ");
-    lblLengthError.setBounds(97, 275, 3000, 25);
+    lblLengthError.setBounds(60, 275, 3000, 25);
     lblLengthError.setFont(font2);
     lblLengthError.setForeground(Color.RED);
     pnlInitial.add(lblLengthError);
@@ -173,7 +185,7 @@ public class GameWindow extends JFrame implements ActionListener{
     pnlInitial.add(lblDeckDefault);
 
     lblDeckError = new JLabel("   ");
-    lblDeckError.setBounds(385, 275, 3000, 25);
+    lblDeckError.setBounds(368, 275, 3000, 25);
     lblDeckError.setFont(font2);
     lblDeckError.setForeground(Color.RED);
     pnlInitial.add(lblDeckError);
@@ -256,6 +268,58 @@ public class GameWindow extends JFrame implements ActionListener{
     pnlGame.add(btnPeak);
 
     return pnlGame;
+  }
+
+  public JPanel continuePanel(){
+    
+    pnlContinue = new JPanel();
+    pnlContinue.setLayout(null);
+    add(pnlContinue);
+
+    lblGameInfo2 = new JLabel(" ");
+    lblGameInfo2.setFont(titleFont);
+    lblGameInfo2.setBounds(250, 15, 600, 50);
+    pnlContinue.add(lblGameInfo2);
+
+    lblDealerCards2 = new JLabel("The dealers cards are: ");
+    lblDealerCards2.setBounds(10, 50, 200, 50);
+    pnlContinue.add(lblDealerCards2);
+
+    txtDealerCards2 = new JTextArea(dealer.handToString());
+    txtDealerCards2.setBounds(10, 85, 175, 225);
+    pnlContinue.add(txtDealerCards2);
+
+    lblYourCards2 = new JLabel("Your cards are: ");
+    lblYourCards2.setBounds(215, 50, 200, 50);
+    pnlContinue.add(lblYourCards2);
+
+    txtYourCards2 = new JTextArea(player.handToString());
+    txtYourCards2.setBounds(215, 85, 175, 225);
+    pnlContinue.add(txtYourCards2);
+
+    lblDealerTotal2 = new JLabel("The dealers total is: " + dealer.getHandSum());
+    lblDealerTotal2.setBounds(10, 300, 200, 50);
+    pnlContinue.add(lblDealerTotal2);
+
+    lblYourTotal2 = new JLabel("Your total is: " + player.getHandSum());
+    lblYourTotal2.setBounds(215, 300, 200, 50);
+    pnlContinue.add(lblYourTotal2);
+
+    lblBank = new JLabel("You have a total of: " + player.getCurrentValue() + "$");
+    lblBank.setBounds(400, 85, 200, 50);
+    pnlContinue.add(lblBank);
+
+    lblYourBet = new JLabel("Your bet is: " + moneyBet + "$");
+    lblYourBet.setBounds(400, 105, 200, 50);
+    pnlContinue.add(lblYourBet);
+
+    btnContinue = new JButton("Continue");
+    btnContinue.setBounds(225, 350, 150, 50);
+    btnContinue.setActionCommand("Continue");
+    btnContinue.addActionListener(this);
+    pnlContinue.add(btnContinue);
+
+    return pnlContinue;
   }
 
   public JPanel endPanel(){
@@ -386,6 +450,7 @@ public class GameWindow extends JFrame implements ActionListener{
             deckSize = Integer.parseInt(txtDeckSize.getText());
             deck = new SpecialDeck(deckSize);
           } catch (NumberFormatException ex){
+            lblBetError2.setBounds(200, 160, 3000, 25);
             lblDeckError.setText("Please enter a valid number!");
             System.out.println(ex + " Deck Size");
           }
@@ -395,16 +460,17 @@ public class GameWindow extends JFrame implements ActionListener{
           moneyBet = Double.parseDouble(txtBet.getText());
           if (moneyBet > player.getCurrentValue()){
             betError = "You cannot bet more money than you have!";
+            lblBetError2.setBounds(175, 160, 3000, 25);
             lblBetError2.setText(betError);
           }
           else {
             beginGame();
+            System.out.println("herreerere");
             layout.show(base, "game");
-            // 
           }
         }catch (NumberFormatException ex) {
           betError = "Please enter a valid number!";
-          lblBetError.setText(betError);
+          lblBetError2.setText(betError);
           System.out.println(ex + " betting");
         }
         break;
@@ -434,6 +500,7 @@ public class GameWindow extends JFrame implements ActionListener{
         break;
       case "Stand":
         stand();
+        endGame();
         break;
       case "Peek":
         PeekWindow myFrame = new PeekWindow();
@@ -466,6 +533,8 @@ public class GameWindow extends JFrame implements ActionListener{
         loginFrame.setSize(600, 500); // set frame size
         loginFrame.setVisible(true); // display frame
         break;
+      case "Continue":
+        layout.show(base, "end");
       default:
         break;
         
@@ -537,12 +606,18 @@ public class GameWindow extends JFrame implements ActionListener{
     
     if (isWin()){
       lblEndInfo.setText("Great Job! You won the game");
+      lblGameInfo2.setText("You Won!");
     }
     else {
       lblEndInfo.setText("Better luck next time");
+      lblGameInfo2.setText("You Lost!");
     }
-    
-    // layout.show(base, "end");
+  
+    txtDealerCards2.setText(dealer.handToString());
+    lblDealerTotal2.setText("The dealers total is: " + dealer.getHandSum());
+    txtYourCards2.setText(player.handToString());
+    lblYourTotal2.setText("Your total is: " + player.getHandSum());
+    layout.show(base, "continue");
 
     player.addGame(moneyBet, isWin());
 
@@ -570,10 +645,9 @@ public class GameWindow extends JFrame implements ActionListener{
       dealerCards = dealer.handToString();
       txtDealerCards.setText(dealerCards);
       lblDealerTotal.setText("The dealers total is: " + dealer.getHandSum());
+      wait(1000);
     }
-    while (dealer.distanceFrom(gameLength) > player.distanceFrom(gameLength));
-
-    endGame();
+    while (dealer.distanceFrom(gameLength) >= player.distanceFrom(gameLength));
   }
 
 }

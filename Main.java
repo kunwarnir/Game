@@ -1,5 +1,3 @@
-import javax.swing.*;
-
 /*
 *
 *
@@ -12,6 +10,8 @@ import javax.swing.*;
 *
 *
 */
+
+import javax.swing.*;
 
 
 class Main {
