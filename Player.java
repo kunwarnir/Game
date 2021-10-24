@@ -20,7 +20,7 @@ public class Player extends Person{
     hand = new ArrayList<Card>();
     historyValues = new ArrayList<>();
     historyGames = new ArrayList<>();
-    lives = 1;
+    lives = 2;
     sum = 0;
   }
 

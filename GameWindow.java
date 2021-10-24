@@ -13,10 +13,12 @@ public class GameWindow extends JFrame implements ActionListener{
   JPanel pnlGame;
   JPanel pnlEnd;
   JPanel pnlAgain;
+  JPanel pnlPeekFail;
   JPanel game;
   JPanel initial;
   JPanel end;
   JPanel again;
+  JPanel peekFail;
 
   JLabel lblWelcome;
   JLabel lblWelcome2;
@@ -35,6 +37,7 @@ public class GameWindow extends JFrame implements ActionListener{
   JLabel lblGameInfo;
   JLabel lblBank;
   JLabel lblYourBet;
+  JLabel lblPeekFail;
 
   JLabel lblEndInfo;
   JLabel lblCurrentMoneyInfo;
@@ -90,11 +93,13 @@ public class GameWindow extends JFrame implements ActionListener{
     game = gamePanel();
     end = endPanel();
     again = againPanel();
+    peekFail = peekFailPanel();
 
     base.add(initial, "initial");
     base.add(game, "game");
     base.add(end, "end");
     base.add(again, "again");
+    base.add(peekFail, "peekFail");
 
 
     layout.show(base, "initial");
@@ -322,6 +327,23 @@ public class GameWindow extends JFrame implements ActionListener{
 
   }
 
+  public JPanel peekFailPanel(){
+
+    pnlPeekFail = new JPanel();
+    pnlPeekFail.setLayout(null);
+    add(pnlPeekFail);
+
+    lblPeekFail = new JLabel("You failed 2 peeks, you will be forced to quit the game!");
+    lblPeekFail.setFont(titleFont);
+    lblPeekFail.setBounds(80, 20, 600, 50);
+    pnlPeekFail.add(lblPeekFail);
+
+    pnlPeekFail.add(btnViewProgress);
+
+    return pnlPeekFail;
+
+  }
+
   @Override
   public void actionPerformed(ActionEvent e) {
     switch (e.getActionCommand()){
@@ -393,8 +415,6 @@ public class GameWindow extends JFrame implements ActionListener{
         break;
       case "Stand":
         stand();
-        endGame();
-
         break;
       case "Peek":
         PeekWindow myFrame = new PeekWindow();
@@ -402,6 +422,11 @@ public class GameWindow extends JFrame implements ActionListener{
         myFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         myFrame.setSize(500, 100); // set frame size
         myFrame.setVisible(true); // display frame
+
+        if (player.getLives() == 0){
+          player.addGame(moneyBet, false);
+          layout.show(base, "peekFail");
+        }
         break;
       case "Again":
         layout.show(base, "again");
@@ -487,7 +512,7 @@ public class GameWindow extends JFrame implements ActionListener{
       lblEndInfo.setText("Better luck next time");
     }
     
-    layout.show(base, "end");
+    // layout.show(base, "end");
 
     player.addGame(moneyBet, isWin());
 
@@ -510,10 +535,15 @@ public class GameWindow extends JFrame implements ActionListener{
   }
 
   public void stand(){
-    dealer.addCard(deck.pullTop());
-    dealerCards = dealer.handToString();
-    txtDealerCards.setText(dealerCards);
-    lblDealerTotal.setText("The dealers total is: " + dealer.getHandSum());
+    do {
+      dealer.addCard(deck.pullTop());
+      dealerCards = dealer.handToString();
+      txtDealerCards.setText(dealerCards);
+      lblDealerTotal.setText("The dealers total is: " + dealer.getHandSum());
+    }
+    while (dealer.distanceFrom(gameLength) > player.distanceFrom(gameLength));
+
+    endGame();
   }
 
 }
