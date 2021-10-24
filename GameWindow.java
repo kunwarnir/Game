@@ -426,7 +426,10 @@ public class GameWindow extends JFrame implements ActionListener{
         if (player.getLives() == 0){
           player.addGame(moneyBet, false);
           layout.show(base, "peekFail");
+          
         }
+        wait(2000);
+
         break;
       case "Again":
         layout.show(base, "again");
@@ -469,6 +472,14 @@ public class GameWindow extends JFrame implements ActionListener{
 
     return win;
     
+  }
+
+  public void wait(int time){
+    try {
+      Thread.sleep(time);
+    } catch (Exception ex){
+      System.out.println(ex);
+    }
   }
 
   public boolean keepPlaying(int length){

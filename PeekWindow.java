@@ -85,7 +85,7 @@ public class PeekWindow extends JFrame implements ActionListener{
     lblFail.setBounds(75, 15, 500, 25);
     pnlFail.add(lblFail);
 
-    lblLoseLife = new JLabel("You have " + player.getLives() + " lives left!");
+    lblLoseLife = new JLabel("You have " + (player.getLives() -1) + " lives left!");
     lblLoseLife.setBounds(175, 50, 500, 25);
     pnlFail.add(lblLoseLife);
     
