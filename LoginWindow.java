@@ -1,6 +1,9 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.*;
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class LoginWindow extends JFrame implements ActionListener{
 
@@ -12,7 +15,7 @@ public class LoginWindow extends JFrame implements ActionListener{
   JTextField txtUserName;
   JTextField txtMoney;
 
-  String betError = "Please enter a valid number for the money bet (cannot leave empty)";
+  String betError = "Please enter a valid number (cannot leave empty)";
 
   public static Player player = Player.getInstance();
 
@@ -25,29 +28,29 @@ public class LoginWindow extends JFrame implements ActionListener{
     add(panel);
 
     lblUsername = new JLabel("Enter Your Username");
-    lblUsername.setBounds(200, 30, 150, 25);
+    lblUsername.setBounds(220, 30, 150, 25);
     panel.add(lblUsername);
 
     txtUserName = new JTextField(20);
-    txtUserName.setBounds(200, 75, 165, 25);
+    txtUserName.setBounds(225, 75, 150, 25);
     panel.add(txtUserName);
 
     lblMoney = new JLabel("Enter How Much Money You Want to Play With");
-    lblMoney.setBounds(120, 115, 3000, 25);
+    lblMoney.setBounds(140, 150, 3000, 25);
     panel.add(lblMoney);
 
     lblBetError = new JLabel("   ");
-    lblBetError.setBounds(120, 175, 3000, 25);
+    lblBetError.setBounds(140, 215, 3000, 25);
+    lblBetError.setFont(new Font("Serif", Font.PLAIN, 12));
+    lblBetError.setForeground(Color.RED);
     panel.add(lblBetError);
 
     txtMoney = new JTextField(20);
-    txtMoney.setBounds(200, 150, 165, 25);
+    txtMoney.setBounds(225, 185, 150, 25);
     panel.add(txtMoney);
 
-    
-
     btn = new JButton("Login");
-    btn.setBounds(250, 200, 80, 25);
+    btn.setBounds(260, 350, 80, 50);
     btn.setActionCommand("Login");
     btn.addActionListener(this);
     panel.add(btn);
