@@ -3,16 +3,18 @@ import java.util.*;
 import java.util.Collections;
 import java.util.Random;
 
-
-public class Dealer extends Person{
-
+abstract class Person {
+  
   List<Card> hand;
   int sum = 0;
 
-  public Dealer(){
-    hand = new ArrayList<Card>();    
+  public void addCard(Card card){
+    hand.add(card);
   }
 
+  public List<Card> getHand(){
+    return hand;
+  }
 
   public String handToString(){
     String value = "";

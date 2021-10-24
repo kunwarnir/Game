@@ -3,7 +3,7 @@ import java.util.*;
 import java.util.Collections;
 import java.util.Random;
 
-public class Player{
+public class Player extends Person{
 
   private static final Player INSTANCE = new Player();
 
@@ -34,10 +34,6 @@ public class Player{
 
   public static Player getInstance(){
     return INSTANCE;
-  }
-
-  public Player (String username){
-    this.username = username;
   }
   
   public String getUsername(){
@@ -90,55 +86,11 @@ public class Player{
     return "You played " + (historyGames.size()-1) + " games\n" + games;
   }
 
-  public void addCard(Card card){
-    hand.add(card);
-  }
-
-  public List<Card> getHand(){
-    return hand;
-  }
-
-  public String toString(){
-    String value = "";
-    
-    for (Card card: hand){
-      if (value.isEmpty()){
-        value = card.toString();
-      }
-      else {
-        value += "\n" + card.toString();
-      }
-    }
-
-    return value;
-  }
-
   public String getFileMessage(){
     String message = "*********************\n" + "Your username: : " + username + "\n" + getGameStats() + "\nYou started with: " + initialValue +
         "$\nYou ended with: " + currentValue + "$\n*********************\n";
 
     return message;
-  }
-
-  public int getHandSum(){
-    sum = 0;
-    for (Card card: hand){
-      sum += card.getValue();
-    }
-    
-    return sum;
-  }
-
-  public void clearSum(){
-    sum = 0;
-  }
-
-  public int distanceFrom(int length){
-    return length - sum;
-  }
-
-  public void clearHand(){
-    hand.clear();
   }
 
   public void loseLife(){
