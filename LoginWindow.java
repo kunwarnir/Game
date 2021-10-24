@@ -9,6 +9,7 @@ public class LoginWindow extends JFrame implements ActionListener{
 
   JButton btn;
   JLabel lblUsername;
+  JLabel lblUsernameError;
   JLabel lblMoney;
   JLabel lblBetError;
   JPanel panel;
@@ -28,8 +29,14 @@ public class LoginWindow extends JFrame implements ActionListener{
     add(panel);
 
     lblUsername = new JLabel("Enter Your Username");
-    lblUsername.setBounds(220, 30, 150, 25);
+    lblUsername.setBounds(223, 30, 150, 25);
     panel.add(lblUsername);
+
+    lblUsernameError = new JLabel("   ");
+    lblUsernameError.setBounds(215, 100, 3000, 25);
+    lblUsernameError.setFont(new Font("Serif", Font.PLAIN, 12));
+    lblUsernameError.setForeground(Color.RED);
+    panel.add(lblUsernameError);
 
     txtUserName = new JTextField(20);
     txtUserName.setBounds(225, 75, 150, 25);
@@ -40,7 +47,7 @@ public class LoginWindow extends JFrame implements ActionListener{
     panel.add(lblMoney);
 
     lblBetError = new JLabel("   ");
-    lblBetError.setBounds(140, 215, 3000, 25);
+    lblBetError.setBounds(145, 215, 3000, 25);
     lblBetError.setFont(new Font("Serif", Font.PLAIN, 12));
     lblBetError.setForeground(Color.RED);
     panel.add(lblBetError);
@@ -61,9 +68,13 @@ public class LoginWindow extends JFrame implements ActionListener{
   public void actionPerformed(ActionEvent e) {
     switch (e.getActionCommand()){
       case "Login":
-               
+          if (txtUserName.getText().isEmpty()){
+            lblUsernameError.setText("Username cannot be empty!");
+          }
+          else {
+            player.setUsername(txtUserName.getText());
+          }
         try {
-          player.setUsername(txtUserName.getText());
           player.setMoney(Double.parseDouble(txtMoney.getText()));
 
           GameWindow myFrame = new GameWindow();
