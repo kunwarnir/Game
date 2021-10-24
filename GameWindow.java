@@ -27,11 +27,14 @@ public class GameWindow extends JFrame implements ActionListener{
   JLabel lblBet;
   JLabel lblBetAgain;
   JLabel lblBetError;
+  JLabel lblBetError2;
   JLabel lblGameLength;
   JLabel lblLengthDefault;
   JLabel lblDeckSize;
   JLabel lblDeckSize2;
   JLabel lblDeckDefault;
+  JLabel lblLengthError;
+  JLabel lblDeckError;
   JLabel lblDealerTotal;
   JLabel lblYourTotal;
   JLabel lblGameInfo;
@@ -123,9 +126,11 @@ public class GameWindow extends JFrame implements ActionListener{
     lblBet.setBounds(150, 100, 3000, 25);
     pnlInitial.add(lblBet);
 
-    lblBetError = new JLabel("   ");
-    lblBetError.setBounds(200, 160, 3000, 25);
-    pnlInitial.add(lblBetError);
+    lblBetError2 = new JLabel("   ");
+    lblBetError2.setBounds(175, 160, 3000, 25);
+    lblBetError2.setFont(font2);
+    lblBetError2.setForeground(Color.RED);
+    pnlInitial.add(lblBetError2);
 
     txtBet = new JTextField(20);
     txtBet.setBounds(250, 135, 100, 25);
@@ -144,6 +149,12 @@ public class GameWindow extends JFrame implements ActionListener{
     lblLengthDefault.setBounds(97, 250, 100, 25);
     pnlInitial.add(lblLengthDefault);
 
+    lblLengthError = new JLabel("   ");
+    lblLengthError.setBounds(97, 275, 3000, 25);
+    lblLengthError.setFont(font2);
+    lblLengthError.setForeground(Color.RED);
+    pnlInitial.add(lblLengthError);
+
     lblDeckSize = new JLabel("Enter how many decks");
     lblDeckSize.setBounds(375, 185, 300, 25);
     pnlInitial.add(lblDeckSize);
@@ -160,6 +171,12 @@ public class GameWindow extends JFrame implements ActionListener{
     lblDeckDefault.setFont(font2);
     lblDeckDefault.setBounds(385, 250, 150, 25);
     pnlInitial.add(lblDeckDefault);
+
+    lblDeckError = new JLabel("   ");
+    lblDeckError.setBounds(385, 275, 3000, 25);
+    lblDeckError.setFont(font2);
+    lblDeckError.setForeground(Color.RED);
+    pnlInitial.add(lblDeckError);
     
     btnBegin = new JButton("Begin");
     btnBegin.setBounds(400, 400, 100, 50);
@@ -356,6 +373,7 @@ public class GameWindow extends JFrame implements ActionListener{
           try {
             gameLength = Integer.parseInt(txtGamelength.getText());
           } catch (NumberFormatException ex){
+            lblLengthError.setText("Please enter a valid number!");
             System.out.println(ex + " Game Length");
           }
         }
@@ -368,6 +386,7 @@ public class GameWindow extends JFrame implements ActionListener{
             deckSize = Integer.parseInt(txtDeckSize.getText());
             deck = new SpecialDeck(deckSize);
           } catch (NumberFormatException ex){
+            lblDeckError.setText("Please enter a valid number!");
             System.out.println(ex + " Deck Size");
           }
         }
@@ -376,7 +395,7 @@ public class GameWindow extends JFrame implements ActionListener{
           moneyBet = Double.parseDouble(txtBet.getText());
           if (moneyBet > player.getCurrentValue()){
             betError = "You cannot bet more money than you have!";
-            lblBetError.setText(betError);
+            lblBetError2.setText(betError);
           }
           else {
             beginGame();
