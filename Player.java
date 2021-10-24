@@ -10,15 +10,26 @@ public class Player extends Person{
   private String username;
   private double initialValue;
   private double currentValue;
-  private static ArrayList<Double> historyValues = new ArrayList<>();
-  public static ArrayList<Boolean> historyGames = new ArrayList<>();
-  List<Card> hand;
-  int sum = 0;
+  private static ArrayList<Double> historyValues;
+  public static ArrayList<Boolean> historyGames;
+  // List<Card> hand;
+  // int sum = 0;
   int lives;
 
   private Player(){
     hand = new ArrayList<Card>();
+    historyValues = new ArrayList<>();
+    historyGames = new ArrayList<>();
     lives = 1;
+    sum = 0;
+  }
+
+  public static Player getInstance(){
+    return INSTANCE;
+  }
+
+  public void addCard(Card card){
+    hand.add(card);
   }
 
   public void setUsername(String username){
@@ -30,10 +41,6 @@ public class Player extends Person{
     currentValue = money;
     historyValues.add(money);
     historyGames.add(false);
-  }
-
-  public static Player getInstance(){
-    return INSTANCE;
   }
   
   public String getUsername(){

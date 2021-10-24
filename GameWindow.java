@@ -462,8 +462,8 @@ public class GameWindow extends JFrame implements ActionListener{
     dealer.addCard(deck.pullTop());
     player.addCard(deck.pullTop());
 
-    dealerCards = dealer.toString();
-    yourCards = player.toString();
+    dealerCards = dealer.handToString();
+    yourCards = player.handToString();
 
     txtDealerCards.setText(dealerCards); 
     txtYourCards.setText(yourCards);
@@ -493,7 +493,7 @@ public class GameWindow extends JFrame implements ActionListener{
 
     lblCurrentMoneyValues.setText(String.valueOf(player.getCurrentValue()));
     lblYourHandInfo.setText("You had a score of: " + player.getHandSum());
-    txtYourHandValues.setText(player.toString());
+    txtYourHandValues.setText(player.handToString());
 
     player.clearSum();
     dealer.clearSum();
@@ -504,14 +504,14 @@ public class GameWindow extends JFrame implements ActionListener{
 
   public void hit(){
     player.addCard(deck.pullTop());
-    yourCards = player.toString();
+    yourCards = player.handToString();
     txtYourCards.setText(yourCards);
     lblYourTotal.setText("Your total is: " + player.getHandSum()); 
   }
 
   public void stand(){
     dealer.addCard(deck.pullTop());
-    dealerCards = dealer.toString();
+    dealerCards = dealer.handToString();
     txtDealerCards.setText(dealerCards);
     lblDealerTotal.setText("The dealers total is: " + dealer.getHandSum());
   }

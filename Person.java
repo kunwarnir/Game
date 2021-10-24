@@ -5,12 +5,10 @@ import java.util.Random;
 
 abstract class Person {
   
-  List<Card> hand;
-  int sum = 0;
+  public List<Card> hand;
+  public int sum = 0;
 
-  public void addCard(Card card){
-    hand.add(card);
-  }
+  public abstract void addCard(Card card);
 
   public List<Card> getHand(){
     return hand;
