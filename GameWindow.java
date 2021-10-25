@@ -3,7 +3,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.*;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 public class GameWindow extends JFrame implements ActionListener{
 
@@ -519,7 +518,6 @@ public class GameWindow extends JFrame implements ActionListener{
           layout.show(base, "peekFail");
           
         }
-        wait(2000);
 
         break;
       case "Again":
@@ -566,14 +564,6 @@ public class GameWindow extends JFrame implements ActionListener{
 
     return win;
     
-  }
-
-  public void wait(int time){
-    try {
-      Thread.sleep(time);
-    } catch (Exception ex){
-      System.out.println(ex);
-    }
   }
 
   public boolean keepPlaying(int length){

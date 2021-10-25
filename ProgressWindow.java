@@ -31,12 +31,12 @@ public class ProgressWindow extends JFrame implements ActionListener{
     lblTitle.setFont(new Font("Helvetica", Font.BOLD, 16));
     panel.add(lblTitle);
 
-    lblInfo = new JLabel("This are your stats:");
-    lblInfo.setBounds(75, 50, 300, 25);
+    lblInfo = new JLabel("These are your stats:");
+    lblInfo.setBounds(66, 75, 300, 25);
     panel.add(lblInfo);
 
     txtYourStats = new JTextArea(player.getFileMessage());
-    txtYourStats.setBounds(66, 85, 200, 225);
+    txtYourStats.setBounds(66, 100, 200, 225);
     panel.add(txtYourStats);
 
     btnPlayAgain = new JButton("Play Again");
