@@ -6,96 +6,95 @@ import java.util.Random;
 
 public class GameWindow extends JFrame implements ActionListener{
 
-  Container base;
+  private Container base;
   
-  JPanel pnlInitial;
-  JPanel pnlGame;
-  JPanel pnlEnd;
-  JPanel pnlAgain;
-  JPanel pnlPeekFail;
-  JPanel pnlContinue;
-  JPanel game;
-  JPanel initial;
-  JPanel end;
-  JPanel again;
-  JPanel peekFail;
-  JPanel continuePanel;
+  private JPanel pnlInitial;
+  private JPanel pnlGame;
+  private JPanel pnlEnd;
+  private JPanel pnlAgain;
+  private JPanel pnlPeekFail;
+  private JPanel pnlContinue;
+  private JPanel game;
+  private JPanel initial;
+  private JPanel end;
+  private JPanel again;
+  private JPanel peekFail;
+  private JPanel continuePanel;
 
-  JLabel lblWelcome;
-  JLabel lblWelcome2;
-  JLabel lblDealerCards;
-  JLabel lblYourCards;
-  JLabel lblDealerCards2;
-  JLabel lblYourCards2;
-  JLabel lblBet;
-  JLabel lblBetAgain;
-  JLabel lblBetError;
-  JLabel lblBetError2;
-  JLabel lblGameLength;
-  JLabel lblLengthDefault;
-  JLabel lblDeckSize;
-  JLabel lblDeckSize2;
-  JLabel lblDeckDefault;
-  JLabel lblLengthError;
-  JLabel lblDeckError;
-  JLabel lblDealerTotal;
-  JLabel lblYourTotal;
-  JLabel lblDealerTotal2;
-  JLabel lblYourTotal2;
-  JLabel lblGameInfo;
-  JLabel lblGameInfo2;
-  JLabel lblBank;
-  JLabel lblYourBet;
-  JLabel lblYourBet2;
-  JLabel lblPeekFail;
+  private JLabel lblWelcome;
+  private JLabel lblWelcome2;
+  private JLabel lblDealerCards;
+  private JLabel lblYourCards;
+  private JLabel lblDealerCards2;
+  private JLabel lblYourCards2;
+  private JLabel lblBet;
+  private JLabel lblBetAgain;
+  private JLabel lblBetError;
+  private JLabel lblBetError2;
+  private JLabel lblGameLength;
+  private JLabel lblLengthDefault;
+  private JLabel lblDeckSize;
+  private JLabel lblDeckSize2;
+  private JLabel lblDeckDefault;
+  private JLabel lblLengthError;
+  private JLabel lblDeckError;
+  private JLabel lblDealerTotal;
+  private JLabel lblYourTotal;
+  private JLabel lblDealerTotal2;
+  private JLabel lblYourTotal2;
+  private JLabel lblGameInfo;
+  private JLabel lblGameInfo2;
+  private JLabel lblBank;
+  private JLabel lblYourBet;
+  private JLabel lblYourBet2;
+  private JLabel lblPeekFail;
 
-  JLabel lblEndInfo;
-  JLabel lblCurrentMoneyInfo;
-  JLabel lblCurrentMoneyValues;
-  JLabel lblYourHandInfo;
-  JTextArea txtYourHandValues;
+  private JLabel lblEndInfo;
+  private JLabel lblCurrentMoneyInfo;
+  private JLabel lblCurrentMoneyValues;
+  private JLabel lblYourHandInfo;
+  private JTextArea txtYourHandValues;
   
-  JTextField txtBet;
-  JTextField txtbetAgain;
-  JTextField txtGamelength;
-  JTextField txtDeckSize;
+  private JTextField txtBet;
+  private JTextField txtbetAgain;
+  private JTextField txtGamelength;
+  private JTextField txtDeckSize;
 
-  JButton btnBegin;
-  JButton btnBeginAgain;
-  JButton btnBack;
-  JButton btnPeak;
-  JButton btnHit;
-  JButton btnStand;
-  JButton btnPlayAgain;
-  JButton btnViewProgress;
-  JButton btnViewProgress2;
-  JButton btnContinue;
+  private JButton btnBegin;
+  private JButton btnBeginAgain;
+  private JButton btnBack;
+  private JButton btnPeak;
+  private JButton btnHit;
+  private JButton btnStand;
+  private JButton btnPlayAgain;
+  private JButton btnViewProgress;
+  private JButton btnViewProgress2;
+  private JButton btnContinue;
 
-  JTextArea txtDealerCards;
-  JTextArea txtDealerCards2;
-  String dealerCards = "";
-  JTextArea txtYourCards;
-  JTextArea txtYourCards2;
-  String yourCards = "";
-  String betError;
+  private JTextArea txtDealerCards;
+  private JTextArea txtDealerCards2;
+  private String dealerCards = "";
+  private JTextArea txtYourCards;
+  private JTextArea txtYourCards2;
+  private String yourCards = "";
+  private String betError;
 
-  double moneyBet;
+  private double moneyBet;
   //default game length
-  int gameLength= 21;
-  int deckSize = 1;
-  boolean win = false;
+  private int gameLength= 21;
+  private int deckSize = 1;
 
   // same as the player in the other class because of singleton design pattern
-  static Player player = Player.getInstance();
-  static Dealer dealer = new Dealer();
+  private static Player player = Player.getInstance();
+  private static Dealer dealer = new Dealer();
 
   public static Random randomNumber = new Random();
   public static DeckOfCards deck;
 
-  CardLayout layout = new CardLayout();
+  private CardLayout layout = new CardLayout();
 
-  Font titleFont = new Font("Helvetica", Font.BOLD, 16);
-  Font font2 = new Font("Serif", Font.PLAIN, 12);
+  private Font titleFont = new Font("Helvetica", Font.BOLD, 16);
+  private Font font2 = new Font("Serif", Font.PLAIN, 12);
 
   public GameWindow(){
     super("Black Jack");

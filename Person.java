@@ -1,14 +1,9 @@
-import java.util.ArrayList;
 import java.util.*;
-import java.util.Collections;
-import java.util.Random;
 
 abstract class Person {
   
   public List<Card> hand;
   public int sum = 0;
-
-  public abstract void addCard(Card card);
 
   public List<Card> getHand(){
     return hand;
@@ -48,5 +43,9 @@ abstract class Person {
 
   public void clearHand(){
     hand.clear();
+  }
+
+  public void addCard(Card card){
+    hand.add(card);
   }
 }

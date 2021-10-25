@@ -7,16 +7,16 @@ import java.util.concurrent.TimeUnit;
 
 public class LoginWindow extends JFrame implements ActionListener{
 
-  JButton btn;
-  JLabel lblUsername;
-  JLabel lblUsernameError;
-  JLabel lblMoney;
-  JLabel lblBetError;
-  JPanel panel;
-  JTextField txtUserName;
-  JTextField txtMoney;
+  private JButton btn;
+  private JLabel lblUsername;
+  private JLabel lblUsernameError;
+  private JLabel lblMoney;
+  private JLabel lblBetError;
+  private JPanel panel;
+  private JTextField txtUserName;
+  private JTextField txtMoney;
 
-  String betError = "Please enter a valid number (cannot leave empty)";
+  private String betError = "Please enter a valid number (cannot leave empty)";
 
   public static Player player = Player.getInstance();
 

@@ -7,7 +7,6 @@ public class DeckOfCards {
   public static ArrayList<Card> deck;
   private ArrayList<Card> pulled;
   private ArrayList<Card> remaining;
-  private Random randomNumber;
 
   public DeckOfCards(){
 
@@ -47,8 +46,6 @@ public class DeckOfCards {
   }
 
   public Card pullTop(){
-
-    randomNumber = new Random();
     pulled = new ArrayList<>();
     Card pulledCard;
 
@@ -81,9 +78,5 @@ public class DeckOfCards {
 
   public ArrayList<Card> getPulled(){
     return pulled;
-  }
-
-  public void print(){
-
   }
 }

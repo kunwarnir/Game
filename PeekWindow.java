@@ -6,20 +6,20 @@ import java.util.Random;
 
 public class PeekWindow extends JFrame implements ActionListener{
 
-  Container base;
+  private Container base;
   
-  JPanel pnlSuccess;
-  JPanel pnlFail;
+  private JPanel pnlSuccess;
+  private JPanel pnlFail;
 
-  JPanel success;
-  JPanel fail;
+  private JPanel success;
+  private JPanel fail;
 
-  JLabel lblSuccess;
-  JLabel lblNextCard;
-  JLabel lblFail;
-  JLabel lblLoseLife;
+  private JLabel lblSuccess;
+  private JLabel lblNextCard;
+  private JLabel lblFail;
+  private JLabel lblLoseLife;
 
-  CardLayout layout = new CardLayout();
+  private CardLayout layout = new CardLayout();
   Random random;
 
   Player player = Player.getInstance();

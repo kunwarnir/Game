@@ -11,10 +11,8 @@ public class Player extends Person{
   private double initialValue;
   private double currentValue;
   private static ArrayList<Double> historyValues;
-  public static ArrayList<Boolean> historyGames;
-  // List<Card> hand;
-  // int sum = 0;
-  int lives;
+  private static ArrayList<Boolean> historyGames;
+  private int lives;
 
   private Player(){
     hand = new ArrayList<Card>();
@@ -28,12 +26,12 @@ public class Player extends Person{
     return INSTANCE;
   }
 
-  public void addCard(Card card){
-    hand.add(card);
-  }
-
   public void setUsername(String username){
     this.username = username;
+  }
+
+  public String getUsername(){
+    return username;
   }
 
   public void setMoney(double money){
@@ -43,10 +41,6 @@ public class Player extends Person{
     historyGames.add(false);
   }
   
-  public String getUsername(){
-    return username;
-  }
-
   public double getInitValue(){
     return initialValue;
   }

@@ -6,15 +6,15 @@ import java.awt.event.ActionListener;
 
 public class ProgressWindow extends JFrame implements ActionListener{
 
-  JPanel panel;
-  JLabel lblInfo;
-  JLabel lblTitle;
-  JButton btnDownload;
-  JButton btnPlayAgain;
-  JTextArea txtYourStats;
+  private JPanel panel;
+  private JLabel lblInfo;
+  private JLabel lblTitle;
+  private JButton btnDownload;
+  private JButton btnPlayAgain;
+  private JTextArea txtYourStats;
   
-  String fileMessage;
-  File file = new File("stats.txt");
+  private String fileMessage;
+  private File file = new File("stats.txt");
 
   Player player = Player.getInstance();
 
