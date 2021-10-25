@@ -14,7 +14,7 @@ public class ProgressWindow extends JFrame implements ActionListener{
   JTextArea txtYourStats;
   
   String fileMessage;
-  File file = new File("progress.txt");
+  File file = new File("stats.txt");
 
   Player player = Player.getInstance();
 
